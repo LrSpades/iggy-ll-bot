@@ -2,22 +2,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '.'
 
-const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory', {
-});
-
-try {
-	sequelize.authenticate();
-	console.log("Connection to Sequelize/Sqlite3 has been established successfully");
-}
-catch (error) {
-	console.error("Unable to connect to the database:", error);
-}
-
 client.once('ready', async () => {
 	console.log('Successfully Logged in as Rapid!');
-	await sequelize.sync();
-	console.log('Database synchronized successfully.');
 });
 
 client.on('guildMemberAdd', member => {
@@ -40,17 +26,7 @@ Current ping is ${ping}ms`);
 	}
 	else if (command === 'pet') {
 		// Not yet working with data
-	}
-	else if (command === 'closedb' && message.author.id === '632260979148718084') {
-		try {
-			sequelize.close();
-			return message.channel.send('Database successfully closed');
-		}
-		catch (error) {
-			console.error(error);
-			return message.channel.send('Database failed to close.');
-		}
-	}
+
 	else if (command === 'random') {
 		if(args[0] === undefined) {
 			return message.channel.send('After `.random` input a number greater than 0, and lower than 1001.');
