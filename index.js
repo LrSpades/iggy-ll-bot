@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const { prefix } = require('./config.json');
+const prefix = '.'
 
 const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory', {
