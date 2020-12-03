@@ -26,7 +26,7 @@ Current ping is ${ping}ms`);
 	}
 	else if (command === 'pet') {
 		// Not yet working with data
-
+	}
 	else if (command === 'random') {
 		if(args[0] === undefined) {
 			return message.channel.send('After `.random` input a number greater than 0, and lower than 1001.');
