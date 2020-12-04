@@ -28,7 +28,7 @@ client.on('message', message => {
 	const command = args.shift().toLowerCase();
 
 	if (command === 'ping') {
-		client.commands.get('ping').execute(message, args);
+		client.commands.get('ping').execute(message, args, client);
 	}
 	else if (command === 'beep') {
 		message.channel.send('Boop.');
