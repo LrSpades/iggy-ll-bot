@@ -28,51 +28,19 @@ client.on('message', message => {
 	const command = args.shift().toLowerCase();
 
 	if (command === 'ping') {
-		client.commands.get('ping').execute(message, args, client);
+		client.commands.get('ping').execute(message, client);
 	}
 	else if (command === 'beep') {
-		message.channel.send('Boop.');
+		client.commands.get('beep').execute(message);
 	}
 	else if (command === 'pet') {
 		// Not yet working with data
 	}
 	else if (command === 'random') {
-		if(args[0] === undefined) {
-			return message.channel.send('After `.random` input a number greater than 0, and lower than 1001.');
-		}
-		const maxValue = Math.floor(parseInt(args[0]));
-		if(maxValue > 1000) {
-			return message.channel.send('Please make sure to input a *number* less than *1001*.');
-		}
-		else {
-			try {
-				const randomInt = Math.floor(Math.random() * maxValue);
-				if (typeof randomInt === 'undefined') {
-					return message.channel.send('Please input a number.');
-				}
-				return message.channel.send(`**${randomInt}**`);
-			}
-			catch (error) {
-				console.error(error);
-				return message.channel.send('There was an error executing this command.');
-			}
-		}
+		client.commands.get('random').execute(message, args)
 	}
 	else if(command === 'avatar') {
-		if (!message.mentions.users.size) {
-			const emb = new Discord.MessageEmbed().setImage(message.author.displayAvatarURL()).setTitle(message.author.username);
-			message.channel.send(emb);
-
-		}
-
-		const avatarList = message.mentions.users.map(user => {
-			const emb = new Discord.MessageEmbed().setImage(user.displayAvatarURL()).setTitle(user.username);
-			message.channel.send(emb);
-
-		});
-
-		message.channel.send(avatarList);
-
+		client.commands.get('avatar').execute(message)
 	}
 	else if (command === 'prune') {
 		const amount = parseInt(args[0]) + 1;
