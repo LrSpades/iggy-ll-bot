@@ -148,6 +148,12 @@ client.on('message', message => {
 			{ code: true }
 		);
 	}
+	else if (command === "add") {
+		const target = message.mentions.first();
+		const transferAmount = commandArgs.split(/ +/g).find(arg => !/<@!?\d+>/g.test(arg));
+
+		currency.add(target.id, transferAmount)
+	}
 });
 
 client.login(process.env.token);
