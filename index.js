@@ -149,7 +149,7 @@ client.on('message', message => {
 		);
 	}
 	else if (command === "add") {
-		const target = message.mentions.first();
+		const target = message.mentions.users.first();
 		const transferAmount = commandArgs.split(/ +/g).find(arg => !/<@!?\d+>/g.test(arg));
 
 		currency.add(target.id, transferAmount)
