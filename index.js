@@ -51,6 +51,9 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('message', message => {
+	if (message.author.bot) return;
+	currency.add(message.author.id, 1);
+
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -109,7 +112,7 @@ client.on('message', message => {
 	}
 	else if (command === 'transfer') {
 		const currentAmount = currency.getBalance(message.author.id);
-		const transferAmount = commandArgs.split(/ +/g).find(arg => !/<@!?\d+>/g.test(arg));
+		const transferAmount = args.split(/ +/g).find(arg => !/<@!?\d+>/g.test(arg));
 		const transferTarget = message.mentions.users.first();
 
 		if (!transferAmount || isNaN(transferAmount)) return message.channel.send(`Sorry ${message.author}, that's an invalid amount.`);
@@ -122,7 +125,7 @@ client.on('message', message => {
 		return message.channel.send(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}. Your current balance is ${currency.getBalance(message.author.id)}💰`);
 	}
 	else if (command === 'buy') {
-		const item =  CurrencyShop.findOne({ where: { name: { [Op.like]: commandArgs } } });
+		const item =  CurrencyShop.findOne({ where: { name: { [Op.like]: args } } });
 		if (!item) return message.channel.send(`That item doesn't exist.`);
 		if (item.cost > currency.getBalance(message.author.id)) {
 			return message.channel.send(`You currently have ${currency.getBalance(message.author.id)}, but the ${item.name} costs ${item.cost}!`);
@@ -150,7 +153,7 @@ client.on('message', message => {
 	}
 	else if (command === "add") {
 		const target = message.mentions.users.first();
-		const transferAmount = commandArgs.split(/ +/g).find(arg => !/<@!?\d+>/g.test(arg));
+		const transferAmount = args.split(/ +/g).find(arg => !/<@!?\d+>/g.test(arg));
 
 		currency.add(target.id, transferAmount)
 	}
