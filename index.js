@@ -2,11 +2,6 @@ const Discord = require('discord.js');
 
 const client = new Discord.Client();
 const prefix = '.'
-
-const { Users, CurrencyShop } = require('./dbObjects');
-const { Op } = require('sequelize');
-const currency = new Discord.Collection();
-
 const fs = require('fs');
 
 client.commands = new Discord.Collection();
@@ -18,32 +13,8 @@ for(const file of commandFiles) {
     client.commands.set(command.name, command);
 }
 
-Reflect.defineProperty(currency, 'add', {
-	/* eslint-disable-next-line func-name-matching */
-	value: async function add(id, amount) {
-		const user = currency.get(id);
-		if (user) {
-			user.balance += Number(amount);
-			return user.save();
-		}
-		const newUser = await Users.create({ user_id: id, balance: amount });
-		currency.set(id, newUser);
-		return newUser;
-	},
-});
-
-Reflect.defineProperty(currency, 'getBalance', {
-	/* eslint-disable-next-line func-name-matching */
-	value: function getBalance(id) {
-		const user = currency.get(id);
-		return user ? user.balance : 0;
-	},
-});
-
 client.once('ready', async () => {
 	console.log('Successfully Logged in as Rapid!');
-	const storedBalances = await Users.findAll();
-	storedBalances.forEach(b => currency.set(b.user_id, b));
 });
 
 client.on('guildMemberAdd', member => {
@@ -51,9 +22,6 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('message', message => {
-	if (message.author.bot) return;
-	currency.add(message.author.id, 1);
-
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
