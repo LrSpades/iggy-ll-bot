@@ -101,8 +101,8 @@ client.on('message', message => {
 	}
 	else if (command === 'inv' || command === "inventory") {
 		const target = message.mentions.users.first() || message.author;
-		const user = await Users.findOne({ where: { user_id: target.id } });
-		const items = await user.getItems();
+		const user =  Users.findOne({ where: { user_id: target.id } });
+		const items =  user.getItems();
 
 		if (!items.length) return message.channel.send(`${target.tag} has nothing!`);
 		return message.channel.send(`${target.tag} currently has ${items.map(i => `${i.amount} ${i.item.name}`).join(', ')}`);
@@ -122,20 +122,20 @@ client.on('message', message => {
 		return message.channel.send(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}. Your current balance is ${currency.getBalance(message.author.id)}💰`);
 	}
 	else if (command === 'buy') {
-		const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: commandArgs } } });
+		const item =  CurrencyShop.findOne({ where: { name: { [Op.like]: commandArgs } } });
 		if (!item) return message.channel.send(`That item doesn't exist.`);
 		if (item.cost > currency.getBalance(message.author.id)) {
 			return message.channel.send(`You currently have ${currency.getBalance(message.author.id)}, but the ${item.name} costs ${item.cost}!`);
 		}
 
-		const user = await Users.findOne({ where: { user_id: message.author.id } });
+		const user = Users.findOne({ where: { user_id: message.author.id } });
 		currency.add(message.author.id, -item.cost);
-		await user.addItem(item);
+		user.addItem(item);
 
 		message.channel.send(`You've bought: ${item.name}.`);
 	}
 	else if (command === 'shop') {
-		const items = await CurrencyShop.findAll();
+		const items = CurrencyShop.findAll();
 		return message.channel.send(items.map(item => `${item.name}: ${item.cost}💰`).join('\n'), { code: true });
 	}
 	else if (command === 'leaderboard') {
