@@ -3,6 +3,9 @@ const client = new Discord.Client();
 const prefix = '.'
 const fs = require('fs');
 
+const list = client.guilds.cache.get("myServerID"); 
+list.members.cache.forEach(member => console.log(member.user.username));
+
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
