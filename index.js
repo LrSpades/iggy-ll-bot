@@ -12,6 +12,9 @@ for(const file of commandFiles) {
     client.commands.set(command.name, command);
 }
 
+const list = client.guilds.cache.get("751090237651943556"); 
+list.members.cache.forEach(member => console.log(member.user.username));
+
 client.once('ready', async () => {
 	console.log('Successfully Logged in as Rapid!');
 });
@@ -22,9 +25,6 @@ client.on('guildMemberAdd', member => {
 
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	const list = client.guilds.cache.get("751090237651943556"); 
-	list.members.cache.forEach(member => console.log(member.user.username));
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
