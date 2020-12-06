@@ -16,15 +16,18 @@ client.once('ready', async () => {
 	console.log('Successfully Logged in as Rapid!');
 });
 
+const Guild = client.guilds.cache.get("751090237651943556"); // Getting the guild.
+const Members = Guild.members.cache.map(member => member.id); // Getting the members and mapping them by ID.
+console.log(Members);
+// --> ["1234567890054356", "1323534709650967", "436567540796390"] etc...
+
+
 client.on('guildMemberAdd', member => {
 	member.guild.channel.send("Welcome");
 });
 
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	const list = client.guilds.cache.get("751090237651943556"); 
-	list.members.cache.forEach(member => console.log(member.user.id));
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
