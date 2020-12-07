@@ -66,7 +66,7 @@ client.on('message', message => {
 		client.commands.get('bonk').execute(message);
 	}
 	else if (command === 'getusers') {
-		client.commands.get('getusers').execute(client);
+		client.commands.get('getusers').execute(message, args, client);
 	}
 });
 
