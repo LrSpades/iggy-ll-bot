@@ -65,7 +65,7 @@ client.on('message', message => {
 	else if (command === 'bonk') {
 		client.commands.get('bonk').execute(message);
 	}
-	else if (command === 'getUsers') {
+	else if (command === 'getusers') {
 		client.commands.get('getUsers').execute();
 	}
 });
