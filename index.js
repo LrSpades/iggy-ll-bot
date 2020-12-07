@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '.'
 const fs = require('fs');
-const Data = require('./dbInit.js')
 
 const content = fs.readFileSync('./data/users.txt', {encoding:"utf8"});
 const ids = content.split("\n");
