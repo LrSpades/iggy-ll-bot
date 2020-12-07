@@ -22,10 +22,11 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('message', message => {
+	if(message.author.bot) return;
 	const income = 1
 	Data.Users.get(message.member.id).balance += income;
 
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+	if (!message.content.startsWith(prefix)) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
