@@ -74,7 +74,7 @@ client.on('message', message => {
 	}
 	else if (command === "getbal" && message.member.id === "632260979148718084") {
 		Data.Users.cache.forEach(user => {
-			client.users.get('632260979148718084').send(user.balance)
+			client.users.cache.get('632260979148718084').send(user.balance)
 		})
 	}
 });
