@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '.'
 const fs = require('fs');
-const { IncomingMessage } = require('http');
 const Data = require('./dbInit.js')
 
 client.commands = new Discord.Collection();
