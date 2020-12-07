@@ -50,7 +50,7 @@ module.exports = {
                 syncBalance.push(member.balance);
             })
             const newBalanceData = syncBalance.join("\n")
-            fs.writeFileSync('./data/balance.txt', newBalanceData, (err) => {
+            fs.writeFile('./data/balance.txt', newBalanceData, (err) => {
                 if(err){
                     console.log(err);
                 } else {
@@ -60,3 +60,20 @@ module.exports = {
         },
     }
 }
+
+function Sync() {
+    const syncBalance = [];
+    members.forEach(member => {
+        syncBalance.push(member.balance);
+    })
+    const newBalanceData = syncBalance.join("\n")
+    fs.writeFile('./data/balance.txt', newBalanceData, (err) => {
+        if(err){
+            console.log(err);
+        } else {
+            console.log('Succesfully synced database.')
+        }
+    })
+}
+
+Sync()
