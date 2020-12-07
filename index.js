@@ -74,6 +74,10 @@ client.on('message', message => {
 	else if (command === "bal" || command === "balance") {
 		client.commands.get('bal').execute(message, Data);
 	}
+	else if (command === "syncdata" && message.member.id === '745478694906101871') {
+		Data.System.Sync();
+		message.channel.send('Successfully synced the database!!')
+	}
 });
 
 client.login('Nzg0MTM5OTUwMzE2MDYwNzAy.X8k9PA.FepGfpmZDfM9pJVuVnGzjYRUNmk');
