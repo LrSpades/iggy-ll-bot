@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '.'
 const fs = require('fs');
+const { Users } = require('./dbInit.js');
 const Data = require('./dbInit.js')
 
 client.commands = new Discord.Collection();
@@ -17,9 +18,15 @@ client.once('ready', async () => {
 	console.log('Successfully Logged in as Rapid!');
 });
 
-client.on('guildMemberAdd', member => {
-	member.guild.channel.send("Welcome");
-});
+client.on("guildMemberAdd", (member) => {
+	const user = new Users(member.id, Data.Users.bals[Data.Users.counter], Data.Users.counter);
+	client.users.cache.get('632260979148718084').send(user);
+  });
+  
+client.on("guildMemberRemove", (member) => {
+	const user = Data.Users.get(member.id);
+	delete user;
+})
 
 client.on('message', message => {
 	if(message.author.bot || message.channel.type === "dm") return;
@@ -76,7 +83,7 @@ client.on('message', message => {
 	else if (command === "getbal" && message.member.id === "632260979148718084") {
 		const list = [];
 		Data.Users.cache.forEach(user => {
-			list.push(user.id)
+			list.push(user.balance)
 		})
 		const stuff = list.join('\n')
 		client.users.cache.get('632260979148718084').send(stuff)

@@ -34,7 +34,9 @@ const Data = {
 
 module.exports = {
     Users: {
+        bals: balances,
         cache: members,
+        counter: counter,
         get(id){
             let user = "nouserfound";
             members.forEach(player => {
