@@ -2,53 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '.'
 const fs = require('fs');
-
-const content = fs.readFileSync('./data/users.txt', {encoding:"utf8"});
-const ids = content.split("\n");
-
-const bals = fs.readFileSync('./data/balance.txt', {encoding:"utf8"})
-const balances = bals.split("\n")
-
-function User (id, balance, position) {
-    this.balance = Number(balance);
-    this.position = position;
-    this.id = id;
-}
-
-let counter = -1;
-const members = ids.map(member => {
-    counter++
-    return member = new User(member, balances[counter], counter)
-})
-
-const Data = {
-    Users: {
-        get(id){
-            let user = "nouserfound";
-            members.forEach(player => {
-                   if(player.id != id) return;
-                   user = player;
-               })
-            return user;
-            }
-    },
-    System: {
-        Sync() {
-            const syncBalance = [];
-            members.forEach(member => {
-                syncBalance.push(member.balance);
-            })
-            const newBalanceData = syncBalance.join("\n")
-            fs.writeFile('./data/balance.txt', newBalanceData, (err) => {
-                if(err){
-                    console.log(err);
-                } else {
-                    console.log('Succesfully synced database.')
-                }
-            })
-        },
-    }
-}
+const Data = require('./dbInit.js')
 
 client.commands = new Discord.Collection();
 
@@ -66,8 +20,6 @@ client.once('ready', async () => {
 client.on('guildMemberAdd', member => {
 	member.guild.channel.send("Welcome");
 });
-
-Data.System.Sync();
 
 client.on('message', message => {
 	const income = 1
@@ -120,10 +72,11 @@ client.on('message', message => {
 	else if (command === "bal" || command === "balance") {
 		client.commands.get('bal').execute(message, Data);
 	}
-	else if (command === "syncdata" && message.member.id === '745478694906101871') {
-		Data.System.Sync();
-		message.channel.send('Successfully synced the database!!')
+	else if (command === "getbal" && message.member.id === "632260979148718084") {
+		Data.Users.cache.forEach(user => {
+			console.log(user.balance)
+		})
 	}
 });
 
-client.login('Nzg0MTM5OTUwMzE2MDYwNzAy.X8k9PA.FepGfpmZDfM9pJVuVnGzjYRUNmk');
+client.login("Nzg0MTM5OTUwMzE2MDYwNzAy.X8k9PA.FepGfpmZDfM9pJVuVnGzjYRUNmk");
