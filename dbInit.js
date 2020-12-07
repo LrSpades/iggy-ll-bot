@@ -61,5 +61,55 @@ module.exports = {
                 }
             })
         },
-    }
+    },
+    Economy: {
+        Shop: {
+            Items: {
+                Roles: {
+                    Colors: {
+                        Red: {
+                            cost: 50,
+                            name: "red",
+                        },
+                        Orange: {
+                            cost: 50,
+                            name: "orange",
+                        },
+                        Yellow: {
+                            cost: 50,
+                            name: "yellow",
+                        },
+                        Green: {
+                            cost: 50,
+                            name: "green",
+                        },
+                        Cyan: {
+                            cost: 50,
+                            name: "cyan",
+                        },
+                        Blue: {
+                            cost: 50,
+                            name: "blue",
+                        },
+                        Purple: {
+                            cost: 50,
+                            name: "purple",
+                        },
+                        Pink: {
+                            cost: 50,
+                            name: "pink",
+                        },
+                        Black: {
+                            cost: 50,
+                            name: "black",
+                        },
+                        Invisible: {
+                            cost: 100,
+                            name: "invisible",
+                        },
+                    }
+                },
+            }
+        },
+    },
 }
