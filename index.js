@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const prefix = '.'
 const fs = require('fs');
 
-const Guild = client.guilds.cache.get("335507048017952771"); // Getting the guild.
+const Guild = client.guilds.cache.get("751090237651943556"); // Getting the guild.
 const Members = Guild.members.cache.map(member => member.id); // Getting the members and mapping them by ID.
 console.log(Members);
 
