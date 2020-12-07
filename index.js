@@ -21,6 +21,8 @@ client.on('guildMemberAdd', member => {
 	member.guild.channel.send("Welcome");
 });
 
+Data.System.Sync();
+
 client.on('message', message => {
 	const income = 1
 	Data.Users.get(message.member.id).balance += income;
@@ -71,10 +73,6 @@ client.on('message', message => {
 	}
 	else if (command === "bal" || command === "balance") {
 		client.commands.get('bal').execute(message, Data);
-	}
-	else if (command === "syncdata" && message.member.id === '745478694906101871') {
-		Data.System.Sync();
-		message.channel.send('Successfully synced the database!!')
 	}
 });
 

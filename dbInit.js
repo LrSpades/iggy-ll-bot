@@ -50,7 +50,7 @@ module.exports = {
                 syncBalance.push(member.balance);
             })
             const newBalanceData = syncBalance.join("\n")
-            fs.writeFileSync('balance.txt', newBalanceData, (err) => {
+            fs.writeFileSync('./data/balance.txt', newBalanceData, (err) => {
                 if(err){
                     console.log(err);
                 } else {
