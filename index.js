@@ -22,7 +22,7 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('message', message => {
-	if(message.author.bot) return;
+	if(message.author.bot || message.channel.type === "dm") return;
 	const income = 1
 	Data.Users.get(message.member.id).balance += income;
 
