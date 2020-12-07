@@ -1,3 +1,5 @@
+const Data = require('../dbInit.js')
+
 module.exports = {
     name: 'bal',
     description: "Check your balance!!!",
