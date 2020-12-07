@@ -1,5 +1,2 @@
-module.exports = {
-    users: {
-        balance: 0
-    }
-}
+const fs = require('fs');
+

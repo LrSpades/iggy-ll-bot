@@ -3,6 +3,10 @@ const client = new Discord.Client();
 const prefix = '.'
 const fs = require('fs');
 
+const Guild = client.guilds.cache.get("335507048017952771"); // Getting the guild.
+const Members = Guild.members.cache.map(member => member.id); // Getting the members and mapping them by ID.
+console.log(Members);
+
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
@@ -64,9 +68,6 @@ client.on('message', message => {
 	}
 	else if (command === 'bonk') {
 		client.commands.get('bonk').execute(message);
-	}
-	else if (command === 'getusers') {
-		client.commands.get('getusers').execute(message, args, client);
 	}
 });
 
