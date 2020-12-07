@@ -2,10 +2,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '.'
 const fs = require('fs');
-
-const Guild = client.guilds.cache.get("751090237651943556"); // Getting the guild.
-const Members = Guild.members.cache.map(member => member.id); // Getting the members and mapping them by ID.
-console.log(Members);
+const { IncomingMessage } = require('http');
+const Data = require('./dbInit.js')
 
 client.commands = new Discord.Collection();
 
@@ -25,6 +23,9 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('message', message => {
+	const income = 1
+	Data.Users.get(message.member.id).balance += income;
+
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -69,6 +70,9 @@ client.on('message', message => {
 	else if (command === 'bonk') {
 		client.commands.get('bonk').execute(message);
 	}
+	else if (command === "bal" || command === "balance") {
+		client.commands.get('bal').execute(message, Data);
+	}
 });
 
-client.login(process.env.token);
+client.login("Nzg0MTM5OTUwMzE2MDYwNzAy.X8k9PA.FepGfpmZDfM9pJVuVnGzjYRUNmk");
