@@ -18,20 +18,6 @@ const members = ids.map(member => {
     return member = new User(member, balances[counter], counter)
 })
 
-
-const Data = {
-    Users: {
-             get(id){
-             let user = "nouserfound";
-             members.forEach(player => {
-                    if(player.id != id) return;
-                    user = player;
-                })
-            return user;
-            }
-    }
-}
-
 module.exports = {
     Users: {
         bals: balances,
@@ -109,6 +95,9 @@ module.exports = {
                         },
                     }
                 },
+            },
+            buy(item, user) {
+                
             }
         },
     },

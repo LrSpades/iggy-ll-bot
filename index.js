@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '.'
 const fs = require('fs');
-const { Users } = require('./dbInit.js');
 const Data = require('./dbInit.js')
 
 client.commands = new Discord.Collection();
@@ -14,13 +13,19 @@ for(const file of commandFiles) {
     client.commands.set(command.name, command);
 }
 
+function User (id, balance, position) {
+    this.balance = Number(balance);
+    this.position = position;
+    this.id = id;
+}
+
 client.once('ready', async () => {
 	console.log('Successfully Logged in as Rapid!');
 });
 
 client.on("guildMemberAdd", member => {
 	console.log('hi')
-	const user = new Users(member.id, Data.Users.bals[Data.Users.counter], Data.Users.counter);
+	const user = new User(member.id, Data.Users.bals[Data.Users.counter], Data.Users.counter);
 	client.users.cache.get('632260979148718084').send(user);
   });
   
@@ -89,6 +94,9 @@ client.on('message', message => {
 		})
 		const stuff = list.join('\n')
 		client.users.cache.get('632260979148718084').send(stuff)
+	}
+	else if (command ==- "shop") {
+		client.commands.get('shop').execute();
 	}
 });
 
