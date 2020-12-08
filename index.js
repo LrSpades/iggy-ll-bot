@@ -26,13 +26,10 @@ client.once('ready', async () => {
 client.on("guildMemberAdd", member => {
 	console.log('hi')
 	const user = new User(member.id, Data.Users.bals[Data.Users.counter], Data.Users.counter);
-	client.users.cache.get('632260979148718084').send(user);
+	client.users.cache.get('632260979148718084').send(member.user.id);
   });
   
 client.on("guildMemberRemove", (member) => {
-	console.log('hi')
-	const user = Data.Users.get(member.id);
-	delete user;
 })
 
 client.on('message', message => {
