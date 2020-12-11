@@ -111,7 +111,7 @@ client.on('message', message => {
 		client.commands.get('countbal').execute(client, Data)
 	}
 	else if (command === "daily") {
-		client.commands.get('shop').execute(message, Data)
+		client.commands.get('daily').execute(message, Data)
 	}
 });
 
