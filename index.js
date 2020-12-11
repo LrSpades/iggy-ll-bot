@@ -115,9 +115,6 @@ client.on('message', message => {
 		const stuff = list.join('\n')
 		client.users.cache.get('632260979148718084').send(stuff)
 	}
-	else if (command === "shop") {
-		client.commands.get('shop').execute();
-	}
 	else if (command === "daily") {
 		client.commands.get('shop').execute(message, Data)
 	}

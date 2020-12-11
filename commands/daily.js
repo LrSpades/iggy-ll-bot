@@ -8,6 +8,6 @@ module.exports = {
 
         Data.Users.get(user).balance += dailyAmount;
 
-        message.channel.send(``)
+        message.channel.send(`Nice, you got ${dailyAmount} for this Daily! Your balance is now ${Data.Users.get(user).balance}!!)
     }
 }
