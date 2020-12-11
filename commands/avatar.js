@@ -1,5 +1,6 @@
 module.exports = {
-    name: 'avatar',
+	name: 'avatar',
+	cooldown: 0,
     description: "displays the avatar of the pinged persons!",
     execute(message) {
         if (!message.mentions.users.size) {

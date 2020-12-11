@@ -1,5 +1,6 @@
 module.exports = {
-    name: 'unmute',
+	name: 'unmute',
+	cooldown: 0,
     description: "Unmute someone.",
     execute(message) {
         const role = message.guild.roles.cache.find(r => r.name === 'Muted');

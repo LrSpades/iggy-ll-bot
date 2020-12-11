@@ -1,5 +1,6 @@
 module.exports = {
-    name: 'say',
+	name: 'say',
+	cooldown: 0,
     description: "Make Iggy II say something!",
     execute(message, args) {
         if (!args.length) {

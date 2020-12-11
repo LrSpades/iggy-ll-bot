@@ -1,5 +1,6 @@
 module.exports = {
-    name: 'random',
+	name: 'random',
+	cooldown: 0,
     description: "random number!",
     execute(message, args) {
         if(args[0] === undefined) {

@@ -1,5 +1,6 @@
 module.exports = {
-    name: 'set',
+	name: 'set',
+	cooldown: 0,
     description: "Set the status of Iggy II!",
     execute(message, args, client) {
         if(!args.length) {

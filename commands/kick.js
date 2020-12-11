@@ -1,5 +1,6 @@
 module.exports = {
-    name: 'kick',
+	name: 'kick',
+	cooldown: 0,
     description: "Kick a member!",
     execute(message) {
         const user = message.mentions.users.first();

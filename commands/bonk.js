@@ -1,5 +1,6 @@
 module.exports = {
     name: 'bonk',
+    cooldown: 0,
     description: "Bonk someone...!",
     execute(message) {
         const user = message.mentions.members.first();

@@ -1,5 +1,6 @@
 module.exports = {
     name: 'bal',
+    cooldown: 0,
     description: "Check your balance!!!",
     execute(message, Data) {
         const user = message.member.id;
