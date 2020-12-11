@@ -119,7 +119,7 @@ client.on('message', message => {
 		client.commands.get('shop').execute();
 	}
 	else if (command === "daily") {
-		client.commands.get('shop').execute()
+		client.commands.get('shop').execute(message, Data)
 	}
 });
 
