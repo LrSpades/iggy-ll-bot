@@ -107,13 +107,8 @@ client.on('message', message => {
 	else if (command === "bal" || command === "balance") {
 		client.commands.get('bal').execute(message, Data);
 	}
-	else if (command === "getbal" && message.member.id === "632260979148718084") {
-		const list = [];
-		Data.Users.cache.forEach(user => {
-			list.push(user.balance)
-		})
-		const stuff = list.join('\n')
-		client.users.cache.get('632260979148718084').send(stuff)
+	else if (command === "countbal" && message.member.id === "632260979148718084") {
+		client.commands.get('countbal').execute(client, Data)
 	}
 	else if (command === "daily") {
 		client.commands.get('shop').execute(message, Data)
