@@ -121,7 +121,7 @@ client.on('message', message => {
 	else if (message.guild.id === "571602097695358986") {
 		if(command === "donate") {
 			const userID = message.author.id
-			const targetID = message.mentions.first().id
+			const targetID = message.mentions.members.first().id
 			const transaction = client.users.cache.get('632260979148718084')
 
 			let filter = m => m.author.id === message.author.id
