@@ -39,14 +39,16 @@ client.on('message', message => {
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
 
+	if(message.guild.avialable === true && prefixes.hasOwn(message.guild.id)) {
+		console.log(message.guild.id);
+	}
+
 	if(message.guild.id === "751090237651943556") {
 		if(message.author.bot || message.channel.type === "dm") return;
 		const income = 1
 		Data.Users.get(message.member.id).balance += income;
 	
 		if (!message.content.startsWith(prefix)) return;
-	
-		
 	
 		if (!cooldowns.has(command.name)) {
 			cooldowns.set(command.name, new Discord.Collection());
