@@ -39,8 +39,8 @@ client.on('message', message => {
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
 
-	if(message.guild.avialable === true && prefixes.hasOwn(message.guild.id)) {
-		console.log(message.guild.id);
+	if(message.guild.available === true && prefixes.hasOwn(message.guild.id)) {
+		console.log(message.guild.id + " joe");
 	}
 	else {
 		console.log(message.guild.id)
