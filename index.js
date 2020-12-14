@@ -43,7 +43,7 @@ client.on('message', message => {
 		console.log(message.guild.id);
 	}
 	else {
-		console.log(message.guild)
+		console.log(message.guild.id)
 	}
 
 	if(message.guild.id === "751090237651943556") {
