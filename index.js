@@ -42,6 +42,9 @@ client.on('message', message => {
 	if(message.guild.avialable === true && prefixes.hasOwn(message.guild.id)) {
 		console.log(message.guild.id);
 	}
+	else {
+		console.log(message.guild)
+	}
 
 	if(message.guild.id === "751090237651943556") {
 		if(message.author.bot || message.channel.type === "dm") return;
