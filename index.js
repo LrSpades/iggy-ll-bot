@@ -128,7 +128,7 @@ client.on('message', message => {
 
 			let filter = m => m.author.id === message.author.id
     			transaction.send(`-${donation} ${userID}\n${donation} ${targetID}`).then(() => {
-    			message.channel.awaitMessages(filter, {
+    			transaction.awaitMessages(filter, {
         			max: 1,
         			time: 10000,
         			errors: ['time']
