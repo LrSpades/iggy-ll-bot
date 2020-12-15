@@ -39,13 +39,6 @@ client.on('message', message => {
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
 
-	if(message.guild.available === true && prefixes.hasOwn(message.guild.id)) {
-		console.log(message.guild.id + " joe");
-	}
-	else {
-		console.log(message.guild.id)
-	}
-
 	if(message.guild.id === "751090237651943556") {
 		if(message.author.bot || message.channel.type === "dm") return;
 		const income = 1
@@ -126,13 +119,14 @@ client.on('message', message => {
 	else if (message.guild.id === "571602097695358986") {
 		if(beanStatus === false) return message.channel.send('Bean is currently down or not working at the moment...')
 		if(command === "donate") {
-			const userID = message.author.id
-			const targetID = message.mentions.members.first().id
-			const transaction = client.users.cache.get('632260979148718084')
-			const origin = message.channel.id
+			const userID = message.author.id;
+			const targetID = message.mentions.members.first().id;
+			const transaction = client.users.cache.get('632260979148718084');
+			const origin = message.channel.id;
+			const donation = args[0];
 
 			let filter = m => m.author.id === message.author.id
-    			message.channel.send(`-10 ${userID}\n10 ${targetID}`).then(() => {
+    			message.channel.send(`-${donation} ${userID}\n${donation} ${targetID}`).then(() => {
     			message.channel.awaitMessages(filter, {
         			max: 1,
         			time: 3000,
