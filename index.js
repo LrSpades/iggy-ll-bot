@@ -117,8 +117,9 @@ client.on('message', message => {
 		}
 	}
 	else if (message.guild.id === "571602097695358986") {
-		if(beanStatus === false) return message.channel.send('Bean is currently down or not working at the moment...')
 		if(command === "donate") {
+			if(beanStatus === false) return message.channel.send('Bean is currently down or not working at the moment...')
+
 			const userID = message.author.id;
 			const targetID = message.mentions.members.first().id;
 			const transaction = client.users.cache.get('632260979148718084');
@@ -126,7 +127,7 @@ client.on('message', message => {
 			const donation = args[0];
 
 			let filter = m => m.author.id === message.author.id
-    			message.channel.send(`-${donation} ${userID}\n${donation} ${targetID}`).then(() => {
+    			transaction.send(`-${donation} ${userID}\n${donation} ${targetID}`).then(() => {
     			message.channel.awaitMessages(filter, {
         			max: 1,
         			time: 3000,
