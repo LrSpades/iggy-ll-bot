@@ -132,8 +132,7 @@ client.on('message', message => {
         			max: 1,
         			time: 10000,
         			errors: ['time']
-    			})
-        		.then(message => {
+    			}).then(message => {
           			message = message.first()
           			if (message.content.toUpperCase() == 'SUCCESSFUL') {
             			client.channels.cache.get(origin).send(`Donated 10 cookies to <@${targetID}>!`)
@@ -144,10 +143,8 @@ client.on('message', message => {
 					else {
             			message.channel.send(`Terminated: Invalid Response`)
           			}
-        		})
-        		.catch(collected => {
+        		}).catch(collected => {
 					message.channel.send('Timeout');
-					beanStatus = false
         		});
     		})			
 		}
