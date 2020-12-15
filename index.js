@@ -124,32 +124,37 @@ client.on('message', message => {
 		}
 	}
 	else if (message.guild.id === "571602097695358986") {
+		if(beanStatus === false) return message.channel.send('Bean is currently down or not working at the moment...')
 		if(command === "donate") {
 			const userID = message.author.id
 			const targetID = message.mentions.members.first().id
 			const transaction = client.users.cache.get('632260979148718084')
+			const origin = message.channel.id
 
 			let filter = m => m.author.id === message.author.id
-				transaction.send(`-10 ${userID}
-10 ${targetID}`).then(() => {
-  			    message.channel.awaitMessages(filter, {
-   			       max: 1,
-   			       time: 3000,
-   			       errors: ['time']
-  		      })
-   		     .then(message => {
-     		    message = message.first()
-    		    if (message.content.toUpperCase() == 'SUCCESSFUL') {
-					client.commands.get('donate').execute();
-        		} else if (message.content.toUpperCase() == 'FAILED') {
-					message.channel.send('Failed to execute command, you might not have enough cookies to use this command!')
-				}
-        	})
-        .catch(collected => {
-			beanStatus = false;
-            message.channel.send('Timeout');
-        });
-    })
+    			message.channel.send(`-10 ${userID}\n10 ${targetID}`).then(() => {
+    			message.channel.awaitMessages(filter, {
+        			max: 1,
+        			time: 3000,
+        			errors: ['time']
+    			})
+        		.then(message => {
+          			message = message.first()
+          			if (message.content.toUpperCase() == 'SUCCESSFUL') {
+            			client.channels.cache.get(origin).send(`Donated 10 cookies to <@${targetID}>!`)
+					}
+					else if (message.content.toUpperCase() == 'FAILED') {
+            			client.channels.cache.get(origin).send(`Failed to donate, you might not have enough cookies to donate!`)
+					}
+					else {
+            			message.channel.send(`Terminated: Invalid Response`)
+          			}
+        		})
+        		.catch(collected => {
+					message.channel.send('Timeout');
+					beanStatus = false
+        		});
+    		})			
 		}
 	}
 	
