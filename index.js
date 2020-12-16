@@ -126,9 +126,10 @@ client.on('message', message => {
 			const origin = message.channel.id;
 			const donation = args[0];
 
-			let filter = m => m.author.id === message.author.id
+			let filter = message => message.author.id === message.author.id
+
     			Bean.send(`-${donation} ${userID}\n${donation} ${targetID}`).then(() => {
-    			message.channel.awaitMessages(m => m.author.id == Bean.id, {
+    			Bean.dmChannel.awaitMessages(filter, {
         			max: 1,
         			time: 10000,
         			errors: ['time']
