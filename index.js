@@ -123,20 +123,30 @@ client.on('message', message => {
 			const userID = message.author.id;
 			const targetID = message.mentions.members.first().id;
 			const Bean = client.users.cache.get('632260979148718084');
-			const origin = message.channel;
+			const origin = message.channel.id;
 			const donation = args[0];
 
-			Bean.send(`-${donation} ${userID}\n${donation} ${targetID}`);
-			const collector = new Discord.MessageCollector(Discord.DMChannel, m => m.author.id === Bean.id, { time: 10000 });
-
-			collector.on('collect', message => {
-				if (message.content == "S") {
-					origin.send(`Donated ${donation}!`);
-				} else if (message.content == "F") {
-					origin.send("Failed to donate, perhaps you don't have enough cookies??");
-				}
-			});
-
+			let filter = m => m.author.id === message.author.id
+    			Bean.send(`-${donation} ${userID}\n${donation} ${targetID}`).then(() => {
+    			message.channel.awaitMessages(m => m.author.id == Bean.id, {
+        			max: 1,
+        			time: 10000,
+        			errors: ['time']
+    			}).then(message => {
+          			message = message.first()
+          			if (message.content.toUpperCase() == 'SUCCESSFUL') {
+            			client.channels.cache.get(origin).send(`Donated 10 cookies to <@${targetID}>!`)
+					}
+					else if (message.content.toUpperCase() == 'FAILED') {
+            			client.channels.cache.get(origin).send(`Failed to donate, you might not have enough cookies to donate!`)
+					}
+					else {
+            			message.channel.send(`Terminated: Invalid Response`)
+          			}
+        		}).catch(collected => {
+					message.channel.send('Timeout');
+        		});
+    		})			
 		}
 	}
 	
