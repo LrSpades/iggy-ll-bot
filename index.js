@@ -122,13 +122,13 @@ client.on('message', message => {
 
 			const userID = message.author.id;
 			const targetID = message.mentions.members.first().id;
-			const transaction = client.users.cache.get('632260979148718084');
+			const Bean = client.users.cache.get('632260979148718084');
 			const origin = message.channel.id;
 			const donation = args[0];
 
 			let filter = m => m.author.id === message.author.id
-    			transaction.send(`-${donation} ${userID}\n${donation} ${targetID}`).then(() => {
-    			transaction.awaitMessages(filter, {
+    			Bean.send(`-${donation} ${userID}\n${donation} ${targetID}`).then(() => {
+    			Bean.awaitMessages(filter, {
         			max: 1,
         			time: 10000,
         			errors: ['time']
