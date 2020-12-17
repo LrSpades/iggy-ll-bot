@@ -35,6 +35,29 @@ client.on("guildMemberAdd", member => {
 client.on("guildMemberRemove", (member) => {
 })
 
+client.on('presenceUpdate', (oldPresence, newPresence) => {
+    let member = newPresence.member;
+    // User id of the user you're tracking status.
+    if (member.id === '571638228684374033') {
+        if (oldPresence.status !== newPresence.status) {
+            // Your specific channel to send a message in.
+            let channel = member.guild.channels.cache.get('<channelId>');
+            // You can also use member.guild.channels.resolve('<channelId>');
+
+            let text = "";
+
+            if (newPresence.status === "online") {
+                beanStatus = true;
+            } else if (newPresence.status === "offline") {
+                beanStatus = false;
+            }
+            // etc...
+
+            channel.send(text);
+        }
+    }
+});
+
 client.on('message', message => {
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
@@ -122,36 +145,7 @@ client.on('message', message => {
 	}
 	else if (message.guild.id === "571602097695358986") {
 		if(command === "donate") {
-			if(beanStatus === false) return message.channel.send('Bean is currently down or not working at the moment...')
-
-			const userID = message.author.id;
-			const targetID = message.mentions.members.first().id;
-			const Bean = client.users.cache.get('632260979148718084');
-			const origin = message.channel.id;
-			const donation = args[0];
-
-			let filter = message => message.author.id === message.author.id
-
-    			Bean.send(`-${donation} ${userID}\n${donation} ${targetID}`).then(() => {
-    			Bean.dmChannel.awaitMessages(filter, {
-        			max: 1,
-        			time: 10000,
-        			errors: ['time']
-    			}).then(message => {
-          			message = message.first()
-          			if (message.content.toUpperCase() == 'SUCCESSFUL') {
-            			client.channels.cache.get(origin).send(`Donated 10 cookies to <@${targetID}>!`)
-					}
-					else if (message.content.toUpperCase() == 'FAILED') {
-            			client.channels.cache.get(origin).send(`Failed to donate, you might not have enough cookies to donate!`)
-					}
-					else {
-            			message.channel.send(`Terminated: Invalid Response`)
-          			}
-        		}).catch(collected => {
-					message.channel.send('Timeout');
-        		});
-    		})			
+			client.commands.get('donate').execute(message, args, client, beanStatus)
 		}
 	}
 	
