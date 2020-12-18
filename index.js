@@ -38,7 +38,7 @@ client.on("guildMemberRemove", (member) => {
 client.on('presenceUpdate', (oldPresence, newPresence) => {
     let member = newPresence.member;
     // User id of the user you're tracking status.
-    if (member.id === '632260979148718084') {
+    if (member.id === '571638228684374033') {
         if (oldPresence.status !== newPresence.status) {
             // Your specific channel to send a message in.
             let channel = member.guild.channels.cache.get('<channelId>');
