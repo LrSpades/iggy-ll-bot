@@ -38,7 +38,7 @@ client.on("guildMemberRemove", (member) => {
 client.on('presenceUpdate', (oldPresence, newPresence) => {
     let member = newPresence.member;
     // User id of the user you're tracking status.
-    if (member.id === '571638228684374033') {
+    if (member.id === '632260979148718084') {
         if (oldPresence.status !== newPresence.status) {
             // Your specific channel to send a message in.
             let channel = member.guild.channels.cache.get('<channelId>');
@@ -101,7 +101,7 @@ client.on('message', message => {
 			client.commands.get('beep').execute(message);
 		}
 		else if (command === 'pet') {
-			// Not yet working with data
+			// to be done
 		}
 		else if (command === 'random') {
 			client.commands.get('random').execute(message, args);
