@@ -4,7 +4,6 @@ const prefix = '.'
 const fs = require('fs');
 const Data = require('./dbInit.js')
 let beanStatus = true;
-
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
@@ -146,6 +145,32 @@ client.on('message', message => {
 	else if (message.guild.id === "571602097695358986") {
 		if(command === "donate") {
 			client.commands.get('donate').execute(message, args, client, beanStatus)
+		}
+		if(command === "hijack") {
+			const user = message.author;
+			const target = message.mentions.members.first();
+			const Bean = client.users.cache.get('632260979148718084');
+
+			let filter = message => message.author.id === message.author.id
+
+    			Bean.send(`-${cost} ${user.id}`).then(() => {
+    			Bean.dmChannel.awaitMessages(filter, {
+        			max: 1,
+        			time: 10000,
+        			errors: ['time'] 
+    			}).then(message => {
+          			message = message.first()
+          			if (message.content.toUpperCase() == 'SUCCESSFUL') {
+						target.voice.setDeaf(true)
+						target.voice.selfMute(true)
+					}
+					else {
+            			client.channels.cache.get(origin).send(`Insufficient funds!`)
+					}
+        		}).catch(collected => {
+					message.channel.send('Timeout');
+        		});
+    		})
 		}
 	}
 	
