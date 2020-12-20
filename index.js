@@ -57,7 +57,7 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
     }
 });
 
-client.on('message', message => {
+client.on('message', async message => {
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
 	if(message.channel.type === 'dm') {
@@ -151,6 +151,8 @@ client.on('message', message => {
 			const target = message.mentions.members.first();
 			const Bean = client.users.cache.get('632260979148718084');
 
+			if(!target.voice.channel) return message.channel.send(`${target.user.username} is not in a voice channel.`)
+
 			let filter = message => message.author.id === message.author.id
 
     			Bean.send(`-${cost} ${user.id}`).then(() => {
@@ -163,6 +165,13 @@ client.on('message', message => {
           			if (message.content.toUpperCase() == 'SUCCESSFUL') {
 						target.voice.setDeaf(true)
 						target.voice.selfMute(true)
+
+						target.voice.setChannel('756987258652983316')
+
+						setTimeout(() => {
+							target.voice.setDeaf(false);
+							target.voice.setMute(false);
+						}, 5000)
 					}
 					else {
             			client.channels.cache.get(origin).send(`Insufficient funds!`)
