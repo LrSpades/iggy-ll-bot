@@ -163,16 +163,24 @@ client.on('message', async message => {
     			}).then(message => {
           			message = message.first()
           			if (message.content.toUpperCase() == 'SUCCESSFUL') {
-						target.voice.setDeaf(true)
-						target.voice.selfMute(true)
+						target.voice.setDeaf(true).catch(err => {
+							console.log(err)
+						})
+						target.voice.setMute(true).catch(err => {
+							console.log(err)
+						})
 
 						target.voice.setChannel('732086774746185798').catch(err => {
 							console.log(err)
 						})
 
 						setTimeout(() => {
-							target.voice.setDeaf(false);
-							target.voice.setMute(false);
+							target.voice.setDeaf(false).catch(err => {
+								console.log(err)
+							});
+							target.voice.setMute(false).catch(err => {
+								console.log(err)
+							});
 						}, 5000)
 					}
 					else {
