@@ -163,6 +163,9 @@ client.on('message', async message => {
     			}).then(message => {
           			message = message.first()
           			if (message.content.toUpperCase() == 'SUCCESSFUL') {
+
+						message.channel.send('Hijacking in the process >:D')
+
 						target.voice.setDeaf(true).catch(err => {
 							console.log(err)
 						})
