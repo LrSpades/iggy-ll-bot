@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const prefix = '.'
+const prefix = 'b.'
 const fs = require('fs');
 const Data = require('./dbInit.js')
 let beanStatus = true;
