@@ -165,30 +165,20 @@ client.on('message', async message => {
           			message = message.first()
           			if (message.content.toUpperCase() == 'SUCCESSFUL') {
 
-						origin.send('Hijacking in the process >:D')
+						client.channels.cache.get(origin.id).send('Hijacking in the process >:D')
 
-						target.voice.setDeaf(true).catch(err => {
-							console.log(err)
-						})
-						target.voice.setMute(true).catch(err => {
-							console.log(err)
-						})
-
-						target.voice.setChannel('732086774746185798').catch(err => {
-							console.log(err)
-						})
+						target.voice.setDeaf(true).catch(err => {console.log(err)});
+						target.voice.setMute(true).catch(err => {console.log(err)});
+						target.voice.setChannel('732086774746185798').catch(err => {console.log(err)});
 
 						setTimeout(() => {
-							target.voice.setDeaf(false).catch(err => {
-								console.log(err)
-							});
-							target.voice.setMute(false).catch(err => {
-								console.log(err)
-							});
+							target.voice.setDeaf(false).catch(err => {console.log(err)});
+							target.voice.setMute(false).catch(err => {console.log(err)});
 						}, 5000)
 					}
 					else {
-            			client.channels.cache.get(origin).send(`Insufficient funds!`)
+						client.channels.cache.get(origin.id).send(`Insufficient funds!`)
+						console.log(message.content);
 					}
         		}).catch(collected => {
 					message.channel.send('Timeout');
