@@ -155,7 +155,7 @@ client.on('message', async message => {
 
 			let filter = message => message.author.id === message.author.id
 
-    			Bean.send(`-${cost} ${user.id}`).then(() => {
+    			Bean.send(`-25 ${user.id}`).then(() => {
     			Bean.dmChannel.awaitMessages(filter, {
         			max: 1,
         			time: 10000,
