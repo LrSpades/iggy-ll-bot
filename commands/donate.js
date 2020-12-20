@@ -7,14 +7,14 @@ module.exports = {
 
 			const userID = message.author.id;
 			const targetID = message.mentions.members.first().id;
-			const Bean = client.users.cache.get('571638228684374033');
+			const Bean = client.channels.cache.get('790023648064700436');
 			const origin = message.channel.id;
 			const donation = Math.abs(parseInt(args[0]));
 
 			let filter = message => message.author.id === message.author.id
 
     			Bean.send(`-${donation} ${userID}\n${donation} ${targetID}`).then(() => {
-    			Bean.dmChannel.awaitMessages(filter, {
+    			Bean.awaitMessages(filter, {
         			max: 1,
         			time: 10000,
         			errors: ['time'] 
