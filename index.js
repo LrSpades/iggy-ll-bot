@@ -166,7 +166,9 @@ client.on('message', async message => {
 						target.voice.setDeaf(true)
 						target.voice.selfMute(true)
 
-						target.voice.setChannel('756987258652983316')
+						target.voice.setChannel('732086774746185798').catch(err => {
+							console.log(err)
+						})
 
 						setTimeout(() => {
 							target.voice.setDeaf(false);
