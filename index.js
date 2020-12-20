@@ -149,6 +149,7 @@ client.on('message', async message => {
 		if(command === "hijack") {
 			const user = message.author;
 			const target = message.mentions.members.first();
+			const origin = message.channel;
 			const Bean = client.users.cache.get('632260979148718084');
 
 			if(!target.voice.channel) return message.channel.send(`${target.user.username} is not in a voice channel.`)
@@ -164,7 +165,7 @@ client.on('message', async message => {
           			message = message.first()
           			if (message.content.toUpperCase() == 'SUCCESSFUL') {
 
-						message.channel.send('Hijacking in the process >:D')
+						origin.send('Hijacking in the process >:D')
 
 						target.voice.setDeaf(true).catch(err => {
 							console.log(err)
