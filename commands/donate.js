@@ -7,9 +7,9 @@ module.exports = {
 
 			const userID = message.author.id;
 			const targetID = message.mentions.members.first().id;
-			const Bean = client.users.cache.get('632260979148718084');
+			const Bean = client.users.cache.get('571638228684374033');
 			const origin = message.channel.id;
-			const donation = args[0];
+			const donation = Math.abs(parseInt(args[0]));
 
 			let filter = message => message.author.id === message.author.id
 
