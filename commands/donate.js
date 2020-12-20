@@ -23,12 +23,9 @@ module.exports = {
           			if (message.content.toUpperCase() == 'SUCCESSFUL') {
             			client.channels.cache.get(origin).send(`Donated 10 cookies to <@${targetID}>!`)
 					}
-					else if (message.content.toUpperCase() == 'FAILED') {
-            			client.channels.cache.get(origin).send(`Failed to donate, you might not have enough cookies to donate!`)
-					}
 					else {
-            			message.channel.send(`Terminated: Invalid Response`)
-          			}
+            			client.channels.cache.get(origin).send(`Insufficient funds!`)
+					}
         		}).catch(collected => {
 					message.channel.send('Timeout');
         		});
