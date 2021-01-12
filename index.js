@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const prefix = 'b.'
 const fs = require('fs');
 const Data = require('./dbInit.js')
-const Bean = client.users.get.cache('571638228684374033');
+const Bean = client.users.cache.get('571638228684374033');
 let beanStatus = true;
 client.commands = new Discord.Collection();
 
