@@ -27,12 +27,14 @@ client.once('ready', async () => {
 });
 
 client.on("guildMemberAdd", member => {
-	console.log('hi')
+	if(member.guild.id === '751090237651943556');
 	const user = new User(member.id, Data.Users.bals[Data.Users.counter], Data.Users.counter);
 	client.users.cache.get('632260979148718084').send(member.user.id);
   });
   
 client.on("guildMemberRemove", (member) => {
+	if(member.guild.id === '751090237651943556');
+	console.log(`${member} just left...`)
 })
 
 client.on('presenceUpdate', (oldPresence, newPresence) => {
