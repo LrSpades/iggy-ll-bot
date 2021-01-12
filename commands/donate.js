@@ -19,7 +19,7 @@ module.exports = {
         			errors: ['time'] 
     			}).then(message => {
           			message = message.first()
-          			if (message.content.toUpperCase() == 'SUCCESSS') {
+          			if (message.content.toUpperCase() == 'SUCCESS') {
 						  Bean.send(`${donation} ${targetID}`)
             			client.channels.cache.get(origin).send(`Donated 10 cookies to <@${targetID}>!`)
 					}
