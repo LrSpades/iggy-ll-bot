@@ -12,8 +12,7 @@ module.exports = {
 			const donation = Math.abs(parseInt(args[0]));
 
 			let filter = message => message.author.id === message.author.id
-
-    			Bean.send(`-${donation} ${userID}\n${donation} ${targetID}`).then(() => {
+    			Bean.send(`-${donation} ${userID}`).then(() => {
     			Bean.awaitMessages(filter, {
         			max: 1,
         			time: 10000,
@@ -21,6 +20,7 @@ module.exports = {
     			}).then(message => {
           			message = message.first()
           			if (message.content.toUpperCase() == 'SUCCESSFUL') {
+						  Bean.send(`${donation} ${targetID}`)
             			client.channels.cache.get(origin).send(`Donated 10 cookies to <@${targetID}>!`)
 					}
 					else {
