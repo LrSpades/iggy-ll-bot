@@ -147,43 +147,31 @@ client.on('message', async message => {
 			client.commands.get('donate').execute(message, args, client, beanStatus)
 		}
 		if(command === "hijack") {
-			const user = message.author;
-			const target = message.mentions.members.first();
-			const origin = message.channel;
-			const Bean = client.users.cache.get('632260979148718084');
+			client.commands.get('hijack').execute(message, client, beanStatus);
+		}
+		if(command === "poker") {
+			if(!args) {
+				message.channel.send(`**Poker!**
+Play a game of Texas Holdem poker!
+\`.poker create\` : Create a poker game!
+\`.poker start\` : Start the game!
+\`.poker startingchips [Number]\` : Chnage the starting amount of chips for each player.
+\`.poker kick\` : Kick a player from a game!`);
+			}
+			const subcommand = args.shift();
 
-			if(!target.voice.channel) return message.channel.send(`${target.user.username} is not in a voice channel.`)
+			if(subcommand === "create") {
 
-			let filter = message => message.author.id === message.author.id
+			}
+			else if(subcommand === "start"){
+				let deck = []
+			}
+			else if(subcommand === "startingchips") {
 
-    			Bean.send(`-25 ${user.id}`).then(() => {
-    			Bean.dmChannel.awaitMessages(filter, {
-        			max: 1,
-        			time: 10000,
-        			errors: ['time'] 
-    			}).then(message => {
-          			message = message.first()
-          			if (message.content.toUpperCase() == 'SUCCESSFUL') {
+			}
+			else if(subcommand=== "kick") {
 
-						client.channels.cache.get(origin.id).send('Hijacking in the process >:D')
-
-						target.voice.setDeaf(true).catch(err => {console.log(err)});
-						target.voice.setMute(true).catch(err => {console.log(err)});
-						target.voice.setChannel('732086774746185798').catch(err => {console.log(err)});
-
-						setTimeout(() => {
-							target.voice.setDeaf(false).catch(err => {console.log(err)});
-							target.voice.setMute(false).catch(err => {console.log(err)});
-						}, 5000)
-					}
-					else {
-						client.channels.cache.get(origin.id).send(`Insufficient funds!`)
-						console.log(message.content);
-					}
-        		}).catch(collected => {
-					message.channel.send('Timeout');
-        		});
-    		})
+			}
 		}
 	}
 	
