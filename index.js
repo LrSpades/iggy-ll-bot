@@ -3,6 +3,7 @@ const client = new Discord.Client();
 const prefix = 'b.'
 const fs = require('fs');
 const Data = require('./dbInit.js')
+const Bean = client.users.get.cache('571638228684374033');
 let beanStatus = true;
 client.commands = new Discord.Collection();
 
@@ -143,13 +144,10 @@ client.on('message', async message => {
 		}
 	}
 	else if (message.guild.id === "571602097695358986") {
-		if(command === "donate") {
-			client.commands.get('donate').execute(message, args, client, beanStatus)
-		}
 		if(command === "hijack") {
-			client.commands.get('hijack').execute(message, client, beanStatus);
+			client.commands.get('hijack').execute(args, message, client, beanStatus, Bean);
 		}
-		if(command === "poker") {
+		else if(command === "poker") {
 			if(!args) {
 				message.channel.send(`**Poker!**
 Play a game of Texas Holdem poker!
