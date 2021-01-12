@@ -6,7 +6,7 @@ module.exports = {
         const user = message.author;
 			const target = message.mentions.members.first();
 			const origin = message.channel;
-            const Bean = client.users.cache.get('571638228684374033');
+            const Bean = client.channels.cache.get('790023648064700436');
 
             if(!beanStatus) return message.channel.send(`Bean is currently offline, cannot execute this command.`)
 			if(!target.voice.channel) return message.channel.send(`${target.user.username} is not in a voice channel.`)
