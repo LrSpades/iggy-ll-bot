@@ -147,7 +147,7 @@ client.on('message', async message => {
 	}
 	else if (message.guild.id === "571602097695358986") {
 		if(command === "hijack") {
-			client.commands.get('hijack').execute(args, message, client, beanStatus, Bean);
+			client.commands.get('hijack').execute(args, message, client, beanStatus);
 		}
 		else if(command === "poker") {
 			if(!args) {

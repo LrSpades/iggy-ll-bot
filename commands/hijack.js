@@ -2,10 +2,11 @@ module.exports = {
     name: 'hijack',
     cooldown: 0,
     description: "Hijack users in vc!",
-    execute(args, message, client, beanStatus, Bean) {
+    execute(args, message, client, beanStatus) {
         const user = message.author;
 			const target = message.mentions.members.first();
 			const origin = message.channel;
+            const Bean = client.users.cache.get('571638228684374033');
 
             if(!beanStatus) return message.channel.send(`Bean is currently offline, cannot execute this command.`)
 			if(!target.voice.channel) return message.channel.send(`${target.user.username} is not in a voice channel.`)
@@ -38,7 +39,6 @@ module.exports = {
 						console.log(message.content);
 					}
         		}).catch(collected => {
-					beanStatus = false
 					message.channel.send('Timeout');
         		});
     		})
