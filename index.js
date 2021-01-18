@@ -4,6 +4,8 @@ const prefix = 'b.'
 const fs = require('fs');
 const Data = require('./dbInit.js')
 const Bean = client.users.cache.get('571638228684374033');
+const Scrape = require('./dataScrapper')
+
 let beanStatus = true;
 client.commands = new Discord.Collection();
 
@@ -171,6 +173,37 @@ Play a game of Texas Holdem poker!
 			}
 			else if(subcommand=== "kick") {
 
+			}
+		}
+		else if(command === 'rlstats'){
+			if(args.legnth < 2) return message.channel.send('Not enough arguments required.')
+			
+			let platform = args.shift();
+			const username = args.shift();
+
+			if(platform === 'xbox'){
+				platform = 'xbl'
+			}
+			else if(platform === 'playstation'){
+				platform = 'psn'
+			}
+			else{
+				message.channel.send('Platform given was invalid. Please use "xbox" or "playstation".')
+			}
+
+			try {
+				const stats = Scrape.getRlStats(username, platform)
+
+				const playerStats = new Discord.MessageEmbed()
+					.setTitle(`${username}'s Rocket League Stats`)
+					.addFields(
+
+					)
+
+				message.channel.send(stats)
+			}
+			catch(err){
+				 
 			}
 		}
 	}
