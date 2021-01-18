@@ -199,10 +199,42 @@ Play a game of Texas Holdem poker!
 				const playerStats = new Discord.MessageEmbed()
 					.setTitle(`${username}'s Rocket League Stats`)
 					.addFields(
-
+						{
+							name: stats[0].playlist,
+							value: `${stats[0].mmr} : ${stats[0].mmr}`,
+							inline: true
+						},
+						{
+							name: stats[1].playlist,
+							value: `${stats[1].mmr} : ${stats[1].mmr}`,
+							inline: true
+						},
+						{
+							name: stats[2].playlist,
+							value: `${stats[2].mmr} : ${stats[2].mmr}`,
+							inline: true
+						},
+						{
+							name: stats[3].playlist,
+							value: `${stats[3].mmr} : ${stats[3].mmr}`,
+							inline: true
+						},
+						{
+							name: stats[4].playlist,
+							value: `${stats[4].mmr} : ${stats[4].mmr}`,
+							inline: true
+						},
+						{
+							name: stats[5].playlist,
+							value: `${stats[5].mmr} : ${stats[5].mmr}`,
+							inline: true
+						},
+						{
+							name: stats[6].playlist,
+							value: `${stats[6].mmr} : ${stats[6].mmr}`,
+							inline: true
+						},
 					)
-
-				message.channel.send(stats.toString());
 			}
 			catch(err){
 				 
