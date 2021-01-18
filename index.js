@@ -202,7 +202,7 @@ Play a game of Texas Holdem poker!
 
 					)
 
-				message.channel.send(stats)
+				message.channel.send(stats.toString());
 			}
 			catch(err){
 				 
