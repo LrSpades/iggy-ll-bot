@@ -192,7 +192,7 @@ Play a game of Texas Holdem poker!
 			}
 
 			try {
-				const stats = Scrape.getRlStats(username, platform)
+				const stats = await Scrape.getRlStats(username, platform)
 
 				console.log(stats)
 
@@ -201,6 +201,8 @@ Play a game of Texas Holdem poker!
 					.addFields(
 
 					)
+
+				message.channel.send(stats)
 			}
 			catch(err){
 				 
