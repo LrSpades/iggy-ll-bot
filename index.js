@@ -194,13 +194,13 @@ Play a game of Texas Holdem poker!
 			try {
 				const stats = Scrape.getRlStats(username, platform)
 
+				console.log(stats)
+
 				const playerStats = new Discord.MessageEmbed()
 					.setTitle(`${username}'s Rocket League Stats`)
 					.addFields(
 
 					)
-
-				message.channel.send(stats)
 			}
 			catch(err){
 				 
