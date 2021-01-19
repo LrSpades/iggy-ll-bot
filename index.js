@@ -198,7 +198,7 @@ Play a game of Texas Holdem poker!
 
 			stats.forEach(playlist => {
 				const stat = Object.keys(stats);
-				const name = playlist.shift();
+				const name = stat.shift();
 				const ss = stat.join('\n')
 
 				playerStats.addField(`${name}`, `${ss}`, true);
