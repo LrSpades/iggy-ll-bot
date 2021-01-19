@@ -191,27 +191,21 @@ Play a game of Texas Holdem poker!
 				message.channel.send('Platform given was invalid. Please use "xbox" or "playstation".')
 			}
 
-			try {
-				const stats = await Scrape.getRlStats(username, platform)
+			const stats = await Scrape.getRlStats(username, platform)
 
-				console.log(stats)
+			console.log(stats)
 
-				const playerStats = new Discord.MessageEmbed()
-					.setTitle(`${username}'s Rocket League Stats`)
+			const playerStats = new Discord.MessageEmbed()
+				.setTitle(`${username}'s Rocket League Stats`)
 
-				stats.forEach(playlist => {
-					const stat = playlist.keys();
-					const name = playlist.shift();
-					const ss = stat.join('\n')
-					
-					playerStats.addField(`${name}`, `${ss}`, true);
+			stats.forEach(playlist => {
+				const stat = playlist.keys();
+				const name = playlist.shift();
+				const ss = stat.join('\n')
+
+				playerStats.addField(`${name}`, `${ss}`, true);
 				})
-
-				message.channel.send(playerStats);
-			}
-			catch(err){
-				 
-			}
+			message.channel.send(playerStats);
 		}
 	}
 	
