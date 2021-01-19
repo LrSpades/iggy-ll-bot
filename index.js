@@ -199,10 +199,13 @@ Play a game of Texas Holdem poker!
 				const playerStats = new Discord.MessageEmbed()
 					.setTitle(`${username}'s Rocket League Stats`)
 
-				const stat = playlist.keys();
-				const name = playlist.shift();
-				const ss = stat.join('\n')
-				playerStats.addField(`${name}`, `${ss}`, true);
+				stats.forEach(playlist => {
+					const stat = playlist.keys();
+					const name = playlist.shift();
+					const ss = stat.join('\n')
+					
+					playerStats.addField(`${name}`, `${ss}`, true);
+				})
 
 				message.channel.send(playerStats);
 			}
