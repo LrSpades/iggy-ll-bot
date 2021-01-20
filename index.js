@@ -225,7 +225,7 @@ Play a game of Texas Holdem poker!
 		}
 		else if(command === "countdown"){
 			message.channel.send('The countdown will start at 10 and end after 0, when I say GO!')
-			for(i = 10; i > 10; i--){
+			for(i = 10; i > 0; i--){
 				setTimeout(async () => {
 					if(i === 0){
 						await message.channel.send('GO!!')
