@@ -223,6 +223,15 @@ Play a game of Texas Holdem poker!
 				})
 			message.channel.send(playerStats);
 		}
+		else if(command === "countdown"){
+			message.channel.send('The countdown will start at 10 and end after 0, when I say GO!')
+			for(i = 10; i > 10; 1--){
+				setTimeout(() => {
+					if(i = -1) return message.channel.send("GO!")
+					message.channel.send(i);
+				}, 1000)
+			}
+		}
 	}
 	
 });
