@@ -197,7 +197,7 @@ Play a game of Texas Holdem poker!
 				.setTitle(`${username}'s Rocket League Stats`)
 
 			stats.forEach(playlist => {
-				const stat = Object.keys(stats);
+				const stat = Object.keys(playlist);
 				const name = stat.shift();
 				const ss = stat.join('\n')
 
@@ -209,4 +209,4 @@ Play a game of Texas Holdem poker!
 	
 });
 
-client.login("Nzg0MTM5OTUwMzE2MDYwNzAy.X8k9PA.FepGfpmZDfM9pJVuVnGzjYRUNmk");
+client.login(process.env.token);
