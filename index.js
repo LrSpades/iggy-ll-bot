@@ -235,6 +235,7 @@ Play a game of Texas Holdem poker!
 					}, 1000)
 				}
 			}
+			forLoop();
 		}
 	}
 	
