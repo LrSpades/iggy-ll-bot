@@ -184,11 +184,14 @@ Play a game of Texas Holdem poker!
 			if(platform === 'xbox'){
 				platform = 'xbl'
 			}
-			else if(platform === 'playstation'){
+			else if(platform === 'ps'){
 				platform = 'psn'
 			}
+			else if(platform === 'steam'){
+
+			}
 			else{
-				message.channel.send('Platform given was invalid. Please use "xbox" or "playstation".')
+				message.channel.send('Platform given was invalid. Please use "xbox", "steam" or "ps".')
 			}
 
 			const stats = await Scrape.getRlStats(username, platform)
