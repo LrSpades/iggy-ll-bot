@@ -17,7 +17,7 @@ const logger = winston.createLogger({
 async function getRlStats(username, platform) {
     // Where to download the data
     const uri = `https://rocketleague.tracker.network/rocket-league/profile/${platform}/${username}/overview`
-
+    let values
     // Download the HTML from the web server
     logger.log('info',`Downloading HTML from ${uri}...`);
         try {
@@ -27,7 +27,7 @@ async function getRlStats(username, platform) {
 
             const $stats = $('tbody > tr[data-v-2dd6b9bc]');
 
-            const values = $stats.toArray().map(tr => {
+            values = $stats.toArray().map(tr => {
 
                 const divs = $(tr).find('div[class]:not(.fill):not([role]):not(.wrapper):not(div div.rank)').toArray();
 

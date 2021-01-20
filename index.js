@@ -8,9 +8,6 @@ const Scrape = require('./dataScrapper')
 const winston = require('winston')
 
 const logger = winston.createLogger({
-	level: 'info',
-	format: winston.format.json(),
-	defaultMeta: { servive: 'user-service' },
 	transports: [
 		new winston.transports.File({ filename: 'error.log' }),
 		new winston.transports.File({ filename: 'combined.log' })
@@ -24,6 +21,7 @@ client.commands = new Discord.Collection();
 client.on('debug', m => logger.log('debug', m));
 client.on('warn', m => logger.log('warn', m));
 client.on('error', m => logger.log('error', m));
+process.on('uncaughtException', error => logger.log('error', error));
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 for(const file of commandFiles) {
