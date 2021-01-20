@@ -225,8 +225,11 @@ Play a game of Texas Holdem poker!
 		}
 		else if(command === "countdown"){
 			message.channel.send('The countdown will start at 10 and end after 1, when I say GO!')
-			for(i = 10; i > 0; i--){
+			for(let i = 10; i > 0; i--){
 				setTimeout(() => {
+					if(i === 0){
+						message.channel.send('GO!!')
+					}
 					message.channel.send(i);
 				}, 1000)
 			}
