@@ -5,9 +5,25 @@ const fs = require('fs');
 const Data = require('./dbInit.js')
 const Bean = client.users.cache.get('571638228684374033');
 const Scrape = require('./dataScrapper')
+const winston = require('winston')
+
+const logger = winston.createLogger({
+	level: 'info',
+	format: winston.format.json(),
+	defaultMeta: { servive: 'user-service' },
+	transports: [
+		new winston.transports.File({ filename: 'error.log' }),
+		new winston.transports.File({ filename: 'combined.log' })
+	],
+	format: winston.format.printf(log => `[${log.level.toUpperCase()}] - ${log.message}`),
+});
 
 let beanStatus = true;
 client.commands = new Discord.Collection();
+
+client.on('debug', m => logger.log('debug', m));
+client.on('warn', m => logger.log('warn', m));
+client.on('error', m => logger.log('error', m));
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 for(const file of commandFiles) {
@@ -25,18 +41,17 @@ function User (id, balance, position) {
 const cooldowns = new Discord.Collection();
 
 client.once('ready', async () => {
-	console.log('Successfully Logged in as Rapid!');
+	logger.log('info', 'Successfully Logged in as Rapid!');
 });
 
 client.on("guildMemberAdd", member => {
 	if(member.guild.id === '751090237651943556');
 	const user = new User(member.id, Data.Users.bals[Data.Users.counter], Data.Users.counter);
-	client.users.cache.get('632260979148718084').send(member.user.id);
   });
   
 client.on("guildMemberRemove", (member) => {
 	if(member.guild.id === '751090237651943556');
-	console.log(`${member} just left...`)
+	logger.log('info', `${member} just left...`)
 })
 
 client.on('presenceUpdate', (oldPresence, newPresence) => {
@@ -67,7 +82,7 @@ client.on('message', async message => {
 	const command = args.shift().toLowerCase();
 	if(message.channel.type === 'dm') {
 		if(message.author.id === "571638228684374033") {
-			console.log(message.content);
+			logger.log( 'info',message.content);
 		}
 	}
 	else if(message.guild.id === "751090237651943556") {

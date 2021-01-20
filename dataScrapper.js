@@ -8,34 +8,39 @@ async function getRlStats(username, platform) {
 
     // Download the HTML from the web server
     console.log(`Downloading HTML from ${uri}...`);
-        const response = await got(uri)
+        try {
+            const response = await got(uri)
 
-        const $ = cheerio.load(response.body);
+            const $ = cheerio.load(response.body);
 
-        const $stats = $('tbody > tr[data-v-2dd6b9bc]');
+            const $stats = $('tbody > tr[data-v-2dd6b9bc]');
 
-        const values = $stats.toArray().map(tr => {
+            const values = $stats.toArray().map(tr => {
 
-            const divs = $(tr).find('div[class]:not(.fill):not([role]):not(.wrapper):not(div div.rank)').toArray();
+                const divs = $(tr).find('div[class]:not(.fill):not([role]):not(.wrapper):not(div div.rank)').toArray();
 
-            const player = {};
+                const player = {};
 
-            // Parse the <div>
-            for(div of divs) {
-                const $div = $(div);
+                // Parse the <div>
+                for(div of divs) {
+                    const $div = $(div);
+                
+                    // Map the td class attr to its value
+                    let key = $div.attr('class');
+                    if(key === 'value') key = 'matches';
+                    let value;
 
-                // Map the td class attr to its value
-                let key = $div.attr('class');
-                if(key === 'value') key = 'matches';
-                let value;
+                    value = $div.text().replace(/(\r\n|\n|\r)/gm, "").replace(/(•)/gm, " ");
 
-                value = $div.text().replace(/(\r\n|\n|\r)/gm, "").replace(/(•)/gm, " ");
+                    player[key] = isNaN(+value) ? value : +value;
+                }
 
-                player[key] = isNaN(+value) ? value : +value;
-            }
-
-            return player;
-        });
+                return player;
+            });
+        }
+        catch (err) {
+            
+        }
 
     return values;
 }
