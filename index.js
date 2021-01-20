@@ -199,9 +199,11 @@ Play a game of Texas Holdem poker!
 			stats.forEach(playlist => {
 				const stat = Object.keys(playlist);
 				const name = stat.shift();
-				const ss = stat.join('\n')
+				const ss = stat.map(s => {
+					return `${s}: ${playlist[s]}`
+				}).join('\n')
 
-				playerStats.addField(`${name}`, `${ss}`, true);
+				playerStats.addField(`${playlist[name]}`, `${ss}`, true);
 				})
 			message.channel.send(playerStats);
 		}
