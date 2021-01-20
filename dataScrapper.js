@@ -1,13 +1,25 @@
 const got = require('got')
 const fs = require('fs');
 const cheerio = require('cheerio')
+const winston = require('winston')
+
+const logger = winston.createLogger({
+	level: 'info',
+	format: winston.format.json(),
+	defaultMeta: { servive: 'user-service' },
+	transports: [
+		new winston.transports.File({ filename: 'error.log' }),
+		new winston.transports.File({ filename: 'combined.log' })
+	],
+	format: winston.format.printf(log => `[${log.level.toUpperCase()}] - ${log.message}`),
+});
 
 async function getRlStats(username, platform) {
     // Where to download the data
     const uri = `https://rocketleague.tracker.network/rocket-league/profile/${platform}/${username}/overview`
 
     // Download the HTML from the web server
-    console.log(`Downloading HTML from ${uri}...`);
+    logger.log('info',`Downloading HTML from ${uri}...`);
         try {
             const response = await got(uri)
 
@@ -46,13 +58,13 @@ async function getRlStats(username, platform) {
 }
 
 async function scrape() {
-    console.log('Scraping data...')
+    logger.log('info','Scraping data...')
 
     module.exports = {
         getRlStats,
     }
 
-    console.log('Done scraping!')
+    logger.log('info','Done scraping!')
 }
 
 scrape();
