@@ -227,7 +227,7 @@ Play a game of Texas Holdem poker!
 					else return `${key.toUpperCase()}: ${playlist[key]}`
 				}).join('\n')
 
-				playerStats.addField(`${playlist[name]}`, `${ss}`, true);
+				playerStats.addField(`${playlist[name]}`, `${list}`, true);
 				})
 			message.channel.send(playerStats);
 		}
