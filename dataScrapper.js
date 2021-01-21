@@ -51,17 +51,45 @@ async function getRlStats(username, platform) {
             });
         }
         catch (err) {
-            
+            console.log(err.response.body)
         }
 
     return values;
+}
+
+async function getRlPfp(username, platform) {
+    // Where to download the data
+    const uri = `https://rocketleague.tracker.network/rocket-league/profile/${platform}/${username}/overview`
+    // Download the HTML from the web server
+    logger.log('info',`Downloading HTML from ${uri}...`);
+    try {
+        const response = await got(uri)
+
+        const $ = cheerio.load(response.body);
+
+        const $img = $('.ph-avatar__image');
+
+        return $img.attr(src);
+    }
+    catch (err) {
+        console.log(err.response.body)
+    }
+}
+
+async function getWTStats() {
+    const uri = `https://warthunder.com/en/community/userinfo/?nick=${username}`
+    
+    logger.info(`Downloading HTML from ${uri}`)
 }
 
 async function scrape() {
     logger.log('info','Scraping data...')
 
     module.exports = {
-        getRlStats,
+        RL = {
+            getRlPfp,
+            getRlStats,
+        },
     }
 
     logger.log('info','Done scraping!')

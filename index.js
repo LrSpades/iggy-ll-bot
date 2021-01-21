@@ -207,10 +207,13 @@ Play a game of Texas Holdem poker!
 				message.channel.send('Platform given was invalid. Please use "xbox", "steam" or "ps".')
 			}
 
-			const stats = await Scrape.getRlStats(username, platform)
+			const stats = await Scrape.RL.getRlStats(username, platform)
+			const img = await Scrape.RL.getRLPfp(username, platform)
+			if(!stats) return message.channel.send('Are you sure that you spelled your username correctly? Try again.')
 
 			const playerStats = new Discord.MessageEmbed()
 				.setTitle(`${username}'s Rocket League Stats`)
+				.setThumbnail(img)
 
 			stats.forEach(playlist => {
 				const stat = Object.keys(playlist);
