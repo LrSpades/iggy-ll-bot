@@ -214,12 +214,17 @@ Play a game of Texas Holdem poker!
 			const playerStats = new Discord.MessageEmbed()
 				.setTitle(`${username}'s Rocket League Stats`)
 				.setThumbnail(img)
+				.setURL(`https://rocketleague.tracker.network/rocket-league/profile/${platform}/${username}/overview`)
 
 			stats.forEach(playlist => {
-				const stat = Object.keys(playlist);
+				const keys = Object.keys(playlist);
 				const name = stat.shift();
-				const ss = stat.map(s => {
-					return `${s}: ${playlist[s]}`
+				const list = stat.map(key => {
+					if(key === 'rank') return `${playlist[key]}`
+					else if(key === 'up') return `DIVS UP: ${playlist[key]}`
+					else if(key === 'down') return `DIVS DOWN: ${playlist[key]}`
+					else if(key.includes('result')) return `${playlist[key]}`
+					else return `${key.toUpperCase()}: ${playlist[key]}`
 				}).join('\n')
 
 				playerStats.addField(`${playlist[name]}`, `${ss}`, true);
