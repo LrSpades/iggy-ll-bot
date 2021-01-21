@@ -208,7 +208,7 @@ Play a game of Texas Holdem poker!
 			}
 
 			const stats = await Scrape.RL.getRlStats(username, platform)
-			const img = await Scrape.RL.getRLPfp(username, platform)
+			const img = await Scrape.RL.getRlPfp(username, platform)
 			if(!stats) return message.channel.send('Are you sure that you spelled your username correctly? Try again.')
 
 			const playerStats = new Discord.MessageEmbed()
