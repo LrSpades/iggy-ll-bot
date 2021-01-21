@@ -220,14 +220,14 @@ Play a game of Texas Holdem poker!
 				const keys = Object.keys(playlist);
 				const name = keys.shift();
 				const list = keys.map(key => {
-					if(key === 'rank') return `${playlist[key]}`
-					else if(key === 'up') return `DIVS UP: ${playlist[key]}`
-					else if(key === 'down') return `DIVS DOWN: ${playlist[key]}`
-					else if(key.includes('result')) return `${playlist[key]}`
-					else return `${key.toUpperCase()}: ${playlist[key]}`
+					if(key === 'rank') return `**${playlist[key]}**`
+					else if(key === 'up') return `**DIVS UP:** ${playlist[key]}`
+					else if(key === 'down') return `**DIVS DOWN:** ${playlist[key]}`
+					else if(key.includes('result')) return `**${playlist[key]}**`
+					else return `**${key.toUpperCase()}**: ${playlist[key]}`
 				}).join('\n')
 
-				playerStats.addField(`${playlist[name]}`, `${list}`, true);
+				playerStats.addField(`**${playlist[name]}***`, `${list}`, true);
 				})
 			message.channel.send(playerStats);
 		}
