@@ -218,8 +218,8 @@ Play a game of Texas Holdem poker!
 
 			stats.forEach(playlist => {
 				const keys = Object.keys(playlist);
-				const name = stat.shift();
-				const list = stat.map(key => {
+				const name = keys.shift();
+				const list = keys.map(key => {
 					if(key === 'rank') return `${playlist[key]}`
 					else if(key === 'up') return `DIVS UP: ${playlist[key]}`
 					else if(key === 'down') return `DIVS DOWN: ${playlist[key]}`
