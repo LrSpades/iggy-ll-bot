@@ -67,12 +67,14 @@ async function getRlPfp(username, platform) {
 
         const $ = cheerio.load(response.body);
 
-        const $img = $('.ph-avatar__image');
-
+        const img = $('.ph-avatar__image');
+        const $img = $(img);
         return $img.attr(src);
+
+        console.log(img + $img)
     }
     catch (err) {
-        console.log(err.response.body)
+        console.log(err)
     }
 }
 
