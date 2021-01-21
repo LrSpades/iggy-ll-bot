@@ -86,7 +86,7 @@ async function scrape() {
     logger.log('info','Scraping data...')
 
     module.exports = {
-        RL = {
+        RL: {
             getRlPfp,
             getRlStats,
         },
