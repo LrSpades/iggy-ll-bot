@@ -69,7 +69,7 @@ async function getRlPfp(username, platform) {
 
         const img = $('.ph-avatar__image');
         const $img = $(img);
-        return $img.attr(src);
+        return $img.attr('src');
 
         console.log(img + $img)
     }
