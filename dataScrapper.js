@@ -1,100 +1,96 @@
-const got = require('got')
-const fs = require('fs');
-const cheerio = require('cheerio')
-const winston = require('winston')
+/* eslint-disable no-undef */
+const got = require('got');
+const cheerio = require('cheerio');
+const winston = require('winston');
 
 const logger = winston.createLogger({
 	level: 'info',
-	format: winston.format.json(),
 	defaultMeta: { servive: 'user-service' },
 	transports: [
 		new winston.transports.File({ filename: 'error.log' }),
-		new winston.transports.File({ filename: 'combined.log' })
+		new winston.transports.File({ filename: 'combined.log' }),
 	],
 	format: winston.format.printf(log => `[${log.level.toUpperCase()}] - ${log.message}`),
 });
 
 async function getRlStats(username, platform) {
-    // Where to download the data
-    const uri = `https://rocketleague.tracker.network/rocket-league/profile/${platform}/${username}/overview`
-    let values
-    // Download the HTML from the web server
-    logger.log('info',`Downloading HTML from ${uri}...`);
-        try {
-            const response = await got(uri)
+	// Where to download the data
+	const uri = `https://rocketleague.tracker.network/rocket-league/profile/${platform}/${username}/overview`;
+	let values;
+	// Download the HTML from the web server
+	logger.log('info', `Downloading HTML from ${uri}...`);
+	try {
+		const response = await got(uri);
 
-            const $ = cheerio.load(response.body);
+		const $ = cheerio.load(response.body);
 
-            const $stats = $('tbody > tr[data-v-2dd6b9bc]');
+		const $stats = $('tbody > tr[data-v-2dd6b9bc]');
 
-            values = $stats.toArray().map(tr => {
+		values = $stats.toArray().map(tr => {
 
-                const divs = $(tr).find('div[class]:not(.fill):not([role]):not(.wrapper):not(div div.rank)').toArray();
+			const divs = $(tr).find('div[class]:not(.fill):not([role]):not(.wrapper):not(div div.rank)').toArray();
 
-                const player = {};
+			const player = {};
 
-                // Parse the <div>
-                for(div of divs) {
-                    const $div = $(div);
-                
-                    // Map the td class attr to its value
-                    let key = $div.attr('class');
-                    if(key === 'value') key = 'matches';
-                    let value;
+			// Parse the <div>
+			for(div of divs) {
+				const $div = $(div);
 
-                    value = $div.text().replace(/(\r\n|\n|\r)/gm, "").replace(/(•)/gm, " ");
+				// Map the td class attr to its value
+				let key = $div.attr('class');
+				if(key === 'value') key = 'matches';
+				const value = $div.text().replace(/(\r\n|\n|\r)/gm, '').replace(/(•)/gm, ' ');
 
-                    player[key] = isNaN(+value) ? value : +value;
-                }
+				player[key] = isNaN(+value) ? value : +value;
+			}
 
-                return player;
-            });
-        }
-        catch (err) {
-            console.log(err.response.body)
-        }
+			return player;
+		});
+	}
+	catch (err) {
+		console.log(err.response.body);
+	}
 
-    return values;
+	return values;
 }
 
 async function getRlPfp(username, platform) {
-    // Where to download the data
-    const uri = `https://rocketleague.tracker.network/rocket-league/profile/${platform}/${username}/overview`
-    // Download the HTML from the web server
-    logger.log('info',`Downloading HTML from ${uri}...`);
-    try {
-        const response = await got(uri)
+	// Where to download the data
+	const uri = `https://rocketleague.tracker.network/rocket-league/profile/${platform}/${username}/overview`;
+	// Download the HTML from the web server
+	logger.log('info', `Downloading HTML from ${uri}...`);
+	try {
+		const response = await got(uri);
 
-        const $ = cheerio.load(response.body);
+		const $ = cheerio.load(response.body);
 
-        const img = $('.ph-avatar__image');
-        const $img = $(img);
-        return $img.attr('src');
-
-        console.log(img + $img)
-    }
-    catch (err) {
-        console.log(err)
-    }
+		const img = $('.ph-avatar__image');
+		const $img = $(img);
+		return $img.attr('src');
+	}
+	catch (err) {
+		console.log(err);
+	}
 }
 
+// eslint-disable-next-line no-unused-vars
 async function getWTStats() {
-    const uri = `https://warthunder.com/en/community/userinfo/?nick=${username}`
-    
-    logger.info(`Downloading HTML from ${uri}`)
+	const uri = `https://warthunder.com/en/community/userinfo/?nick=${username}`;
+
+	logger.info(`Downloading HTML from ${uri}`);
 }
 
 async function scrape() {
-    logger.log('info','Scraping data...')
+	logger.log('info', 'Scraping data...');
 
-    module.exports = {
-        RL: {
-            getRlPfp,
-            getRlStats,
-        },
-    }
+	module.exports = {
+		RL: {
+			getRlPfp,
+			getRlStats,
+		},
+	};
 
-    logger.log('info','Done scraping!')
+	logger.log('info', 'Done scraping!');
 }
 
 scrape();

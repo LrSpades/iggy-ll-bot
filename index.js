@@ -1,16 +1,16 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const prefix = 'b.'
+const prefix = 'b.';
 const fs = require('fs');
-const Data = require('./dbInit.js')
+const Data = require('./dbInit.js');
 const Bean = client.users.cache.get('571638228684374033');
-const Scrape = require('./dataScrapper')
-const winston = require('winston')
+const Scrape = require('./dataScrapper');
+const winston = require('winston');
 
 const logger = winston.createLogger({
 	transports: [
 		new winston.transports.File({ filename: 'error.log' }),
-		new winston.transports.File({ filename: 'combined.log' })
+		new winston.transports.File({ filename: 'combined.log' }),
 	],
 	format: winston.format.printf(log => `[${log.level.toUpperCase()}] - ${log.message}`),
 });
@@ -25,15 +25,9 @@ process.on('uncaughtException', error => logger.log('error', error));
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 for(const file of commandFiles) {
-    const command = require(`./commands/${file}`);
+	const command = require(`./commands/${file}`);
 
-    client.commands.set(command.name, command);
-}
-
-function User (id, balance, position) {
-    this.balance = Number(balance);
-    this.position = position;
-    this.id = id;
+	client.commands.set(command.name, command);
 }
 
 const cooldowns = new Discord.Collection();
@@ -42,75 +36,75 @@ client.once('ready', async () => {
 	logger.log('info', 'Successfully Logged in as Rapid!');
 });
 
-client.on("guildMemberAdd", member => {
+client.on('guildMemberAdd', member => {
 	if(member.guild.id === '751090237651943556');
-	const user = new User(member.id, Data.Users.bals[Data.Users.counter], Data.Users.counter);
-  });
-  
-client.on("guildMemberRemove", (member) => {
+});
+
+client.on('guildMemberRemove', (member) => {
 	if(member.guild.id === '751090237651943556');
-	logger.log('info', `${member} just left...`)
-})
+	logger.log('info', `${member} just left...`);
+});
 
 client.on('presenceUpdate', (oldPresence, newPresence) => {
-    let member = newPresence.member;
-    // User id of the user you're tracking status.
-    if (member.id === '571638228684374033') {
-        if (oldPresence.status !== newPresence.status) {
-            // Your specific channel to send a message in.
-            let channel = member.guild.channels.cache.get('<channelId>');
-            // You can also use member.guild.channels.resolve('<channelId>');
+	const member = newPresence.member;
+	// User id of the user you're tracking status.
+	if (member.id === '571638228684374033') {
+		if (oldPresence.status !== newPresence.status) {
+			// Your specific channel to send a message in.
+			const channel = member.guild.channels.cache.get('<channelId>');
+			// You can also use member.guild.channels.resolve('<channelId>');
 
-            let text = "";
+			const text = '';
 
-            if (newPresence.status === "online") {
-                beanStatus = true;
-            } else if (newPresence.status === "offline") {
-                beanStatus = false;
-            }
-            // etc...
+			if (newPresence.status === 'online') {
+				beanStatus = true;
+			}
+			else if (newPresence.status === 'offline') {
+				beanStatus = false;
+			}
+			// etc...
 
-            channel.send(text);
-        }
-    }
+			channel.send(text);
+		}
+	}
 });
 
 client.on('message', async message => {
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
 	if(message.channel.type === 'dm') {
-		if(message.author.id === "571638228684374033") {
-			logger.log( 'info',message.content);
+		if(message.author.id === '571638228684374033') {
+			logger.log('info', message.content);
 		}
 	}
-	else if(message.guild.id === "751090237651943556") {
-		if(message.author.bot || message.channel.type === "dm") return;
-		const income = 1
+	else if(message.guild.id === '751090237651943556') {
+		if(message.author.bot || message.channel.type === 'dm') return;
+		const income = 1;
 		Data.Users.get(message.member.id).balance += income;
-	
+
 		if (!message.content.startsWith(prefix)) return;
-	
+
 		if (!cooldowns.has(command.name)) {
 			cooldowns.set(command.name, new Discord.Collection());
 		}
-	
+
 		const now = Date.now();
 		const timestamps = cooldowns.get(command.name);
 		const cooldownAmount = (command.cooldown || 3) * 1000;
-	
+
 		if (timestamps.has(message.author.id)) {
 			const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-	
+
 			if (now < expirationTime) {
 				const timeLeft = (expirationTime - now) / 1000;
 				return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
 			}
 		}
-	
+
 		timestamps.set(message.author.id, now);
 		setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-	
-	
+
+
 		if (command === 'ping') {
 			client.commands.get('ping').execute(message, client);
 		}
@@ -132,13 +126,13 @@ client.on('message', async message => {
 		else if (command === 'say') {
 			client.commands.get('say').execute(message, args);
 		}
-		else if (command === "ban") {
+		else if (command === 'ban') {
 			client.commands.get('ban').execute(message);
 		}
-		else if(command === "kick") {
+		else if(command === 'kick') {
 			client.commmands.get('kick').execute(message);
 		}
-		else if(command === "mute") {
+		else if(command === 'mute') {
 			client.commands.get('mute').execute(message);
 		}
 		else if(command === 'unmute') {
@@ -150,21 +144,21 @@ client.on('message', async message => {
 		else if (command === 'bonk') {
 			client.commands.get('bonk').execute(message);
 		}
-		else if (command === "bal" || command === "balance") {
+		else if (command === 'bal' || command === 'balance') {
 			client.commands.get('bal').execute(message, Data);
 		}
-		else if (command === "countbal" && message.member.id === "632260979148718084") {
-			client.commands.get('countbal').execute(client, Data)
+		else if (command === 'countbal' && message.member.id === '632260979148718084') {
+			client.commands.get('countbal').execute(client, Data);
 		}
-		else if (command === "daily") {
-			client.commands.get('daily').execute(message, Data)
+		else if (command === 'daily') {
+			client.commands.get('daily').execute(message, Data);
 		}
 	}
-	else if (message.guild.id === "571602097695358986") {
-		if(command === "hijack") {
+	else if (message.guild.id === '571602097695358986') {
+		if(command === 'hijack') {
 			client.commands.get('hijack').execute(args, message, client, beanStatus, Bean);
 		}
-		else if(command === "poker") {
+		else if(command === 'poker') {
 			if(!args) {
 				message.channel.send(`**Poker!**
 Play a game of Texas Holdem poker!
@@ -175,78 +169,78 @@ Play a game of Texas Holdem poker!
 			}
 			const subcommand = args.shift();
 
-			if(subcommand === "create") {
-
+			if(subcommand === 'create') {
+				// In PROGRESS
 			}
-			else if(subcommand === "start"){
-				let deck = []
+			else if(subcommand === 'start') {
+				const deck = [];
+				console.log(deck);
 			}
-			else if(subcommand === "startingchips") {
-
+			else if(subcommand === 'startingchips') {
+				// In PROGRESS
 			}
-			else if(subcommand=== "kick") {
-
+			else if(subcommand === 'kick') {
+				// In PROGRESS
 			}
 		}
-		else if(command === 'rlstats'){
-			if(args.legnth < 2) return message.channel.send('Not enough arguments required.')
-			
+		else if(command === 'rlstats') {
+			if(args.legnth < 2) return message.channel.send('Not enough arguments required.');
+
 			let platform = args.shift();
-			const username = args.shift();
+			const username = args.join(' ');
 
-			if(platform === 'xbox'){
-				platform = 'xbl'
+			if(platform === 'xbox') {
+				platform = 'xbl';
 			}
-			else if(platform === 'ps'){
-				platform = 'psn'
+			else if(platform === 'ps') {
+				platform = 'psn';
 			}
-			else if(platform === 'steam'){
-
+			else if(platform === 'steam') {
+				// Steam is already in the correct form
 			}
 			else{
-				message.channel.send('Platform given was invalid. Please use "xbox", "steam" or "ps".')
+				message.channel.send('Platform given was invalid. Please use "xbox", "steam" or "ps".');
 			}
 
-			const stats = await Scrape.RL.getRlStats(username, platform)
-			const img = await Scrape.RL.getRlPfp(username, platform)
-			if(!stats) return message.channel.send('Are you sure that you spelled your username correctly? Try again.')
+			const stats = await Scrape.RL.getRlStats(username, platform);
+			const img = await Scrape.RL.getRlPfp(username, platform);
+			if(!stats) return message.channel.send('Are you sure that you spelled your username correctly? Try again.');
 
 			const playerStats = new Discord.MessageEmbed()
 				.setTitle(`${username}'s Rocket League Stats`)
 				.setThumbnail(img)
-				.setURL(`https://rocketleague.tracker.network/rocket-league/profile/${platform}/${username}/overview`)
+				.setURL(`https://rocketleague.tracker.network/rocket-league/profile/${platform}/${username}/overview`);
 
 			stats.forEach(playlist => {
 				const keys = Object.keys(playlist);
 				const name = keys.shift();
 				const list = keys.map(key => {
-					if(key === 'rank') return `**${playlist[key]}**`
-					else if(key === 'up') return `**DIVS UP:** ${playlist[key]}`
-					else if(key === 'down') return `**DIVS DOWN:** ${playlist[key]}`
-					else if(key.includes('result')) return `**${playlist[key]}**`
-					else return `**${key.toUpperCase()}**: ${playlist[key]}`
-				}).join('\n')
+					if(key === 'rank') return `**${playlist[key]}**`;
+					else if(key === 'up') return `**DIVS UP:** ${playlist[key]}`;
+					else if(key === 'down') return `**DIVS DOWN:** ${playlist[key]}`;
+					else if(key.includes('result')) return `**${playlist[key]}**`;
+					else return `**${key.toUpperCase()}**: ${playlist[key]}`;
+				}).join('\n');
 
 				playerStats.addField(`**${playlist[name]}***`, `${list}`, true);
-				})
+			});
 			message.channel.send(playerStats);
 		}
-		else if(command === "countdown"){
-			message.channel.send('The countdown will start at 10 and end after 1, when I say GO!')
+		else if(command === 'countdown') {
+			message.channel.send('The countdown will start at 10 and end after 1, when I say GO!');
 			const forLoop = async () => {
-				for(let i = 10; i >= 0; i--){
+				for(let i = 10; i >= 0; i--) {
 					await setTimeout(() => {
-						if(i === 0){
-							message.channel.send('GO!!')
+						if(i === 0) {
+							message.channel.send('GO!!');
 						}
 						message.channel.send(i);
-					}, 1000)
+					}, 1000);
 				}
-			}
+			};
 			forLoop();
 		}
 	}
-	
 });
 
 client.login(process.env.token);
