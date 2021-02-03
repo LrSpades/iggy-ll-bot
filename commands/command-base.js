@@ -112,6 +112,7 @@ module.exports = (client, commandOptions) => {
 
                 if (args.length < minArgs || (maxArgs !== null && args.length > maxArgs)) {
                     message.reply(`Incorrect syntax! Use ${prefix}${alias} ${expectedArgs}`);
+                    return;
                 }
 
                 callback(client, message, args, args.join(' '), DataScrapper);
