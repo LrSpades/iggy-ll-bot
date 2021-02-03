@@ -5,7 +5,7 @@ module.exports = {
     maxArgs: 1,
     callback: (client, message, args, text, DataScrapper) => {
         const user = message.author;
-        const target = message.mentions.users.first();
+        const target = message.mentions.members.first();
         const Bean = client.channels.cache.get('790023648064700436');
         const originChannel = message.channel;
         const cost = 25;
