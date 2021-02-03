@@ -8,7 +8,7 @@ module.exports = {
         const target = message.mentions.members.first();
         const Bean = client.channels.cache.get('790023648064700436');
         const originChannel = message.channel;
-        const cost = 25;
+        const cost = 35;
 
 		if(!target.voice.channel) return message.channel.send(`${target.user.username} is not in a voice channel.`);
 		if(!args) return message.channel.send('You need to mention a victim...');
@@ -21,7 +21,7 @@ module.exports = {
                 time: 3000,
                 errors: ['time'],
             }).then(m => {
-                if(m.content.toUpperCase() === 'SUCCESS') {
+                if(m.content === 'Success') {
                     client.channels.cache.get(originChannel.id).send('Hijacking in the process >:D');
 
 					target.voice.setDeaf(true).catch(err => {console.log(err);});
