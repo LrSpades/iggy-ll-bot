@@ -39,8 +39,8 @@ const validataPermissions = (perms) => {
     ];
 
     for (const perm of perms) {
-        if (!validPermissions.includes(permission)) {
-            throw new error(`Unknown permission node "${permission}"`);
+        if (!validPermissions.includes(perm)) {
+            throw new error(`Unknown permission node "${perm}"`);
         }
     }
 };
@@ -82,8 +82,10 @@ module.exports = (client, commandOptions) => {
     client.on('message', message => {
         const { member, content, guild } = message;
 
-        for (const server of servers) {
-            if (server !== message.guild.id) return;
+        if(servers) {
+            for (const server of servers) {
+                if (server !== message.guild.id) return;
+            }
         }
 
         for (const alias of commands) {

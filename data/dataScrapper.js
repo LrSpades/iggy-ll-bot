@@ -73,49 +73,6 @@ async function getRlPfp(username, platform) {
 	}
 }
 
-async function getChesscomStats(username) {
-	const uri = `https://chess.com/member/${username}`;
-
-	logger.info(`Downloading HTML from ${uri}...`);
-	const stuff = {};
-	try {
-		const response = await got(uri);
-		const $ = cheerio.load(response.body);
-		const avatar = $('div.profile-header-avatar > div > img');
-		stuff.avatar = $(avatar).attr('src');
-		const $stats = $('div.layout-two-column-column-two:nth-child(2) > div');
-		console.log($.html($stats));
-
-		stuff.values = $stats.toArray().map(body => {
-			const divs = $(body).find('div.stat-section-stats-section').toArray();
-
-			const player = {};
-			for (div of divs) {
-				const $div = $(div);
-
-				const key = $div.attr('class');
-				const value = $div.text();
-
-				player[key] = value;
-			}
-			return player;
-		});
-
-		return stuff;
-	}
-	catch(err) {
-		console.error(err);
-	}
-	return stuff;
-}
-
-// eslint-disable-next-line no-unused-vars
-async function getWTStats() {
-	const uri = `https://warthunder.com/en/community/userinfo/?nick=${username}`;
-
-	logger.info(`Downloading HTML from ${uri}`);
-}
-
 async function scrape() {
 	logger.log('info', 'Scraping data...');
 
@@ -124,14 +81,9 @@ async function scrape() {
 			getRlPfp,
 			getRlStats,
 		},
-		Chesscom: {
-			getChesscomStats,
-		},
 	};
-	const d = await getChesscomStats('bpovo1394');
-	console.log(dick);
 
-	logger.log('info', 'Done scraping!');
+	console.log('Done scraping!');
 }
 
 scrape();
