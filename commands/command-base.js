@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-const { prefix } = process.env.prefix;
+const prefix = 'b.';
 const { error } = require('winston');
 const DataScrapper = require('../data/dataScrapper');
 
@@ -68,7 +68,7 @@ module.exports = (client, commandOptions) => {
         commands = [commands];
     }
 
-    console.log(`Registeringg command "${commands[0]}`);
+    console.log(`Registering command "${commands[0]}"`);
 
     // Ensure hte permissions are in an array and are all valid
     if (permissions.length) {
