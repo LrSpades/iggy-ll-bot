@@ -21,6 +21,7 @@ module.exports = {
                 time: 3000,
                 errors: ['time'],
             }).then(m => {
+                m = m.first();
                 if(m.content === 'Success') {
                     client.channels.cache.get(originChannel.id).send('Hijacking in the process >:D');
 
