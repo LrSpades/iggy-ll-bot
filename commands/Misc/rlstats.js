@@ -24,7 +24,7 @@ module.exports = {
         }
 
         const stats = await Data.RL.rlStats(username, platform);
-        const avatar = await Data.RL.rlStats(username, platform);
+        const avatar = await Data.RL.rlPfp(username, platform);
 
         const statsEmbed = new MessageEmbed()
         .setTitle(`${message.member.user.username}'s Rocket League Stats`)
