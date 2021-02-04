@@ -8,7 +8,7 @@ module.exports = {
         const target = message.mentions.members.first();
         const Bean = client.channels.cache.get('790023648064700436');
         const originChannel = message.channel;
-        const cost = 35;
+        const cost = 20;
 
 		if(!target.voice.channel) return message.channel.send(`${target.user.username} is not in a voice channel.`);
 		if(!args) return message.channel.send('You need to mention a victim...');
@@ -23,7 +23,7 @@ module.exports = {
             }).then(message => {
                 message = message.first();
                 if(message.content === 'Success') {
-                    client.channels.cache.get(originChannel.id).send('Hijacking in the process >:D');
+                    client.channels.cache.get(originChannel.id).send(`Hijacking in the process >:D. -${cost} :cookie:`);
 
 					target.voice.setDeaf(true).catch(err => {console.log(err);});
 					target.voice.setMute(true).catch(err => {console.log(err);});
@@ -35,7 +35,7 @@ module.exports = {
 					}, 5000);
                 }
                 else {
-                    originChannel.send('You don\'t have enough cookies!');
+                    originChannel.send(`You don\'t have enough cookies! (You need ${cost} cookies...)`);
                 }
             }).catch(collected => {
                 message.reply('Bean didn\'t respond, sorry');
