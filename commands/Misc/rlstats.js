@@ -6,7 +6,7 @@ module.exports = {
     permissionError: 'You need admin permissions to run this commands',
     minArgs: 2,
     maxArgs: 2,
-    callback: async (client, message, args, text, DataScrapper) => {
+    callback: async (client, message, args, text, Data) => {
         // IN PROGRESS
 
         let platform = args.shift();
@@ -23,8 +23,8 @@ module.exports = {
                 return message.reply('You must use xbox or playstation for now... steam soon!');
         }
 
-        const stats = await DataScrapper.getRlStats(username, platform);
-        const avatar = await DataScrapper.getRlPfp(username, platform);
+        const stats = await Data.RL.rlStats(username, platform);
+        const avatar = await Data.RL.rlStats(username, platform);
 
         const statsEmbed = new MessageEmbed()
         .setTitle(`${message.member.user.username}'s Rocket League Stats`)

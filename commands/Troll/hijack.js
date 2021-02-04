@@ -13,16 +13,16 @@ module.exports = {
 		if(!target.voice.channel) return message.channel.send(`${target.user.username} is not in a voice channel.`);
 		if(!args) return message.channel.send('You need to mention a victim...');
 
-        const filter = m => m.author.id === message.author.id;
+        const filter = message => message.author.id === message.author.id;
 
         Bean.send(`-${cost} ${user.id}`).then(() => {
             Bean.awaitMessages(filter, {
                 max: 1,
                 time: 3000,
                 errors: ['time'],
-            }).then(m => {
-                m = m.first();
-                if(m.content === 'Success') {
+            }).then(message => {
+                message = message.first();
+                if(message.content === 'Success') {
                     client.channels.cache.get(originChannel.id).send('Hijacking in the process >:D');
 
 					target.voice.setDeaf(true).catch(err => {console.log(err);});
@@ -39,6 +39,7 @@ module.exports = {
                 }
             }).catch(collected => {
                 message.reply('Bean didn\'t respond, sorry');
+                console.log(collected);
             });
         });
     },

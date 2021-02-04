@@ -13,7 +13,7 @@ const logger = winston.createLogger({
 	format: winston.format.printf(log => `[${log.level.toUpperCase()}] - ${log.message}`),
 });
 
-async function getRlStats(username, platform) {
+async function rlStats(username, platform) {
 	// Where to download the data
 	const uri = `https://rocketleague.tracker.network/rocket-league/profile/${platform}/${username}/overview`;
 	let values;
@@ -54,7 +54,7 @@ async function getRlStats(username, platform) {
 	return values;
 }
 
-async function getRlPfp(username, platform) {
+async function rlPfp(username, platform) {
 	// Where to download the data
 	const uri = `https://rocketleague.tracker.network/rocket-league/profile/${platform}/${username}/overview`;
 	// Download the HTML from the web server
@@ -78,8 +78,8 @@ async function scrape() {
 
 	module.exports = {
 		RL: {
-			getRlPfp,
-			getRlStats,
+			rlStats,
+			rlPfp,
 		},
 	};
 

@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 const prefix = 'b.';
 const { error } = require('winston');
-const DataScrapper = require('../data/dataScrapper');
+const Data = require('../data/dataScrapper');
 
 const validataPermissions = (perms) => {
     const validPermissions = [
@@ -115,7 +115,7 @@ module.exports = (client, commandOptions) => {
                     return;
                 }
 
-                callback(client, message, args, args.join(' '), DataScrapper);
+                callback(client, message, args, args.join(' '), Data);
 
                 return;
             }
