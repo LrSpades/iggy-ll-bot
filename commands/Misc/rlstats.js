@@ -35,7 +35,7 @@ module.exports = {
             const keys = Object.keys(playlist);
             const name = keys.shift();
             const list = keys.map(key => {
-                if(key === 'rank') return `${playlist}`;
+                if(key === 'rank') return `${playlist[key]}`;
                 else if(key === 'up') return `Divs Up: ${playlist[key]}`;
                 else if(key == 'down') return `Divs Down: ${playlist[key]}`;
                 else if(key.includes('result')) return playlist[key];
