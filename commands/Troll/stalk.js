@@ -3,12 +3,11 @@ module.exports = {
     expectedArgs: '<member>',
     minArgs: 1,
     maxArgs: 1,
-    callback: (client, message, args, text, DataScrapper) => {
+    callback: (Discord, client, message, args, text, DataScrapper) => {
         // IN PROGRESS
         const target = message.mentions.users.first();
+        const webhook = new Discord.WebhookClient('733533527626350704', 'NSIwyWMOOCnVcYSXlyCnxJRoUlrqZN9dhazMUKKIYOHKbpiuGJ7bhdAvOx_PoLqTdIk1');
 
-        const webhooks = message.channel.fetchWebhooks();
-        const webhook = webhooks.first();
         function Stalker(name, messages, pfp) {
             this.name = name;
             this.messages = messages;

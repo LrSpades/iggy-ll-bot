@@ -4,7 +4,7 @@ module.exports = {
     expectedArgs: '<member>',
     minArgs: 1,
     maxArgs: 1,
-    callback: (client, message, args, text, DataScrapper) => {
+    callback: (Discord, client, message, args, text, DataScrapper) => {
         const user = message.author;
         const target = message.mentions.members.first();
         const Bean = client.channels.cache.get('790023648064700436');

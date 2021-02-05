@@ -6,7 +6,7 @@ module.exports = {
     permissionError: 'You need admin permissions to run this commands',
     minArgs: 2,
     maxArgs: 2,
-    callback: async (client, message, args, text, Data) => {
+    callback: async (Discord, client, message, args, text, Data) => {
         // IN PROGRESS
 
         let platform = args.shift();

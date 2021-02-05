@@ -2,6 +2,7 @@
 const prefix = process.env.prefix;
 const { error } = require('winston');
 const Data = require('../data/dataScrapper');
+const Discord = require('discord.js');
 
 const validataPermissions = (perms) => {
     const validPermissions = [
@@ -117,7 +118,7 @@ module.exports = (client, commandOptions) => {
                     return;
                 }
 
-                callback(client, message, args, args.join(' '), Data);
+                callback(Discord, client, message, args, args.join(' '), Data);
 
                 return;
             }
