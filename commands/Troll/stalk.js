@@ -13,10 +13,10 @@ module.exports = {
             this.messages = messages;
             if(pfp) this.pfp = pfp;
         }
-        const predS = new Stalker('predator30', ['I can smell your feet...', 'Are you 18 yet?', 'Age is just a number 15 means nothing'], 'https://cdn.discordapp.com/avatars/237770316422709248/68acaf8b2487bc6b926105ee4954e0db.png?size=128');
-        const rythmS = new Stalker('Rythm', ['If I turn up the music loud enough... *you won\'t hear me coming.*'], 'https://cdn.discordapp.com/avatars/235088799074484224/16c197c4c3f0eb808f9bceb6e1075e71.png?size=128');
-        const trumpS = new Stalker('Donald J. Trump', ['*Falls asleep*...'], 'https://www.nyacknewsandviews.com/wp-content/uploads/2016/03/trump-600x450.jpg');
-        const momS = new Stalker('Mom', ['That\'s it, im getting the sandal.', 'DONT MAKE ME GET THE BELT', 'no phone until you\'re married', 'Sorry son, no more starbucks every 5 hour interval', '*whips belt*']);
+        const predS = new Stalker('predator30', ['', 'Are you 18 yet?', 'Age is just a number 15 means nothing'], 'https://cdn.discordapp.com/avatars/237770316422709248/68acaf8b2487bc6b926105ee4954e0db.png?size=128');
+        const rythmS = new Stalker('Rythm', ['If I turn up the music loud enough... *you won\'t hear me coming from behind...*'], 'https://cdn.discordapp.com/avatars/235088799074484224/16c197c4c3f0eb808f9bceb6e1075e71.png?size=128');
+        const trumpS = new Stalker('Donald J. Trump', ['*Falls asleep*...', 'WRONG!!', 'Wrong, wrong, wrong.', 'FAKE NEWS', 'CHINA'], 'https://www.nyacknewsandviews.com/wp-content/uploads/2016/03/trump-600x450.jpg');
+        const momS = new Stalker('Mom', ['That\'s it, im getting the chancla.', 'DONT MAKE ME GET THE BELT', 'no phone until you\'re married', 'Sorry son, no more starbucks every 5 hour interval', '*whips belt*']);
 
         const customStalkers = [predS, rythmS, momS, trumpS];
         const defaultStalker = new Stalker(['john doe', 'Xx_ur-dad-succs_xX', 'Joe mama'], ['I can smell you from outside.', 'There\'s a hole in your pants.']);
