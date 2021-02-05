@@ -45,8 +45,6 @@ module.exports = {
         },
         1000 * 30);
 
-        stalk();
-
         setTimeout(() => {
             clearInterval(stalk);
         }, 1000 * 60 * 60 * 8);
