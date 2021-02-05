@@ -16,6 +16,8 @@ module.exports = {
 
         const filter = message => message.author.id === message.author.id;
 
+        message.delete();
+
         Bean.send(`-${cost} ${user.id}`).then(() => {
             Bean.awaitMessages(filter, {
                 max: 1,

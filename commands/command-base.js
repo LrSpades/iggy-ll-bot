@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-const prefix = 'b.';
+const prefix = process.env.prefix;
 const { error } = require('winston');
 const Data = require('../data/dataScrapper');
 
