@@ -29,13 +29,13 @@ module.exports = {
                 const fiftyfifty = Math.floor(Math.random() * 2);
                 if(fiftyfifty === 1) {
                     const stalker = customStalkers[Math.floor(Math.random() * customStalkers.length)];
-                    const msg = stalker.messages[Math.floor(Math.random() * customStalkers.length)];
+                    const msg = stalker.messages[Math.floor(Math.random() * stalker.messages.length)];
 
                     webhook.send(`<@${target.id}>, ${msg}`, { username: stalker.name, avatarURL: stalker.pfp });
                 }
                 else {
-                    const stalker = defaultStalker.name[Math.floor(Math.random() * customStalkers.length)];
-                    const msg = defaultStalker.messages[Math.floor(Math.random() * customStalkers.length)];
+                    const stalker = defaultStalker.name[Math.floor(Math.random() * defaultStalker.name.length)];
+                    const msg = defaultStalker.messages[Math.floor(Math.random() * defaultStalker.messages.length)];
 
                     webhook.send(`<@${target.id}>, ${msg}`, { username: stalker });
                 }
@@ -47,6 +47,8 @@ module.exports = {
         setTimeout(() => {
             clearInterval(stalk);
         }, 1000 * 60 * 60 * 8);
+
+        message.channel.send('Started stalking...');
     },
     servers: ['571602097695358986'],
 };
