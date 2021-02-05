@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 module.exports = {
     commands: ['hijack'],
     expectedArgs: '<member>',
@@ -35,7 +36,7 @@ module.exports = {
 					}, 5000);
                 }
                 else {
-                    originChannel.send(`You don\'t have enough cookies! (You need ${cost} cookies...)`);
+                    originChannel.send(`You don't have enough cookies! (You need ${cost} cookies...)`);
                 }
             }).catch(collected => {
                 message.reply('Bean didn\'t respond, sorry');

@@ -82,6 +82,8 @@ module.exports = (client, commandOptions) => {
     client.on('message', message => {
         const { member, content, guild } = message;
 
+        if(message.author.bot) return;
+
         if(servers) {
             for (const server of servers) {
                 if (server !== message.guild.id) return;
