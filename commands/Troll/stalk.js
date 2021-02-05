@@ -5,6 +5,8 @@ module.exports = {
     maxArgs: 1,
     callback: (client, message, args, text, DataScrapper) => {
         // IN PROGRESS
+        const target = message.mentions.users.first();
+
         const webhooks = message.channel.fetchWebhooks();
         const webhook = webhooks.first();
         function Stalker(name, messages, pfp) {
@@ -30,18 +32,20 @@ module.exports = {
                     const stalker = customStalkers[Math.floor(Math.random() * customStalkers.length)];
                     const msg = stalker.messages[Math.floor(Math.random() * customStalkers.length)];
 
-                    webhook.send(msg, { username: stalker.name, avatarURL: stalker.pfp });
+                    webhook.send(`<@${target.id}>, ${msg}`, { username: stalker.name, avatarURL: stalker.pfp });
                 }
                 else {
                     const stalker = defaultStalker.name[Math.floor(Math.random() * customStalkers.length)];
                     const msg = defaultStalker.messages[Math.floor(Math.random() * customStalkers.length)];
 
-                    webhook.send(msg, { username: stalker });
+                    webhook.send(`<@${target.id}>, ${msg}`, { username: stalker });
                 }
 
             }
         },
         1000 * 30);
+
+        stalk();
 
         setTimeout(() => {
             clearInterval(stalk);
