@@ -1,8 +1,6 @@
 /* eslint-disable prefer-const */
 const prefix = process.env.prefix;
-const { error } = require('winston');
-const Data = require('../data/dataScrapper');
-const Discord = require('discord.js');
+const Settings = require('../iggy-settings/');
 
 const validataPermissions = (perms) => {
     const validPermissions = [
@@ -41,7 +39,7 @@ const validataPermissions = (perms) => {
 
     for (const perm of perms) {
         if (!validPermissions.includes(perm)) {
-            throw new error(`Unknown permission node "${perm}"`);
+            throw new Error(`Unknown permission node "${perm}"`);
         }
     }
 };
@@ -118,7 +116,7 @@ module.exports = (client, commandOptions) => {
                     return;
                 }
 
-                callback(Discord, client, message, args, args.join(' '), Data);
+                callback(Settings, message, args, args.join(' '));
 
                 return;
             }
