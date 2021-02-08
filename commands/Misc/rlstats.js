@@ -6,7 +6,7 @@ module.exports = {
     permissionError: 'You need admin permissions to run this commands',
     minArgs: 2,
     maxArgs: 2,
-    callback: async (Discord, client, message, args, text, Data) => {
+    callback: async (Settings, message, args, text) => {
         // IN PROGRESS
 
         let platform = args.shift();
@@ -23,8 +23,8 @@ module.exports = {
                 return message.reply('You must use xbox or playstation for now... steam soon!');
         }
 
-        const stats = await Data.RL.rlStats(username, platform);
-        const avatar = await Data.RL.rlPfp(username, platform);
+        const stats = await Settings.Data.RL.rlStats(username, platform);
+        const avatar = await Settings.Data.RL.rlPfp(username, platform);
 
         const statsEmbed = new MessageEmbed()
         .setTitle(`${message.member.user.username}'s Rocket League Stats`)

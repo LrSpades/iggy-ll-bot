@@ -3,10 +3,10 @@ module.exports = {
     expectedArgs: '<member>',
     minArgs: 1,
     maxArgs: 1,
-    callback: (Discord, client, message, args, text, DataScrapper) => {
+    callback: (Settings, message, args, text) => {
         // IN PROGRESS
         const target = message.mentions.users.first();
-        const webhook = new Discord.WebhookClient('733533527626350704', 'NSIwyWMOOCnVcYSXlyCnxJRoUlrqZN9dhazMUKKIYOHKbpiuGJ7bhdAvOx_PoLqTdIk1');
+        const webhook = new Settings.Discord.WebhookClient('733533527626350704', 'NSIwyWMOOCnVcYSXlyCnxJRoUlrqZN9dhazMUKKIYOHKbpiuGJ7bhdAvOx_PoLqTdIk1');
 
         function Stalker(name, messages, pfp) {
             this.name = name;

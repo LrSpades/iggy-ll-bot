@@ -3,7 +3,7 @@ module.exports = {
     expectedArgs: '<num1> <num2>',
     minArgs: 2,
     maxArgs: 2,
-    callback: (Discord, client, message, args, text, DataScrapper) => {
+    callback: (Settings, message, args, text) => {
         const num1 = args[0];
         const num2 = args[1];
 
