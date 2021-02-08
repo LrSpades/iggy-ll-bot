@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
 const prefix = process.env.prefix;
-const Settings = require('../iggy-settings/');
+const Settings = require('../iggy-settings.js');
 
 const validataPermissions = (perms) => {
     const validPermissions = [
