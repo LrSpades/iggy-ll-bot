@@ -2,7 +2,7 @@ module.exports = {
     commands: ['say'],
     expectedArgs: '<text>',
     minArgs: 1,
-    callback: (Discord, client, message, args, text, DataScrapper) => {
+    callback: (Settings, message, args, text) => {
         message.channel.send(text);
         message.delete({ timeout: 0 });
     },
