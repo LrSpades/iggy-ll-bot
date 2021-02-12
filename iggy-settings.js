@@ -4,7 +4,7 @@ const client = new Discord.Client();
 const Bean = client.channels.cache.get('790023648064700436');
 const fs = require('fs');
 const path = require('path');
-const spades = client.users.cache.get('632260979148718084');
+const spades = client.users.fetch('632260979148718084');
 
 module.exports = {
     Discord: Discord,
