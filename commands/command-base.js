@@ -100,8 +100,9 @@ module.exports = (client, commandOptions) => {
                     }
                 }
 
-                if(message.author.id !== Settings.owner.user.id && testing) {
-                    console.log(message.author + Settings.owner.user);
+                if(message.author !== Settings.owner.user.id && testing) {
+                    console.log(message.author);
+                    console.log(Settings.owner.user.id);
                     return message.reply('Listen here you piece of \\:poop: i bet its you pixel. I made a testing feature so ppl like you dont fing use my commands WHEN IM TESTING THEMMMMM');
                 }
 
