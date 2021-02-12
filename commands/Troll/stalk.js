@@ -61,4 +61,5 @@ module.exports = {
         message.channel.send('Started stalking...');
     },
     servers: ['571602097695358986'],
+    testing: true,
 };

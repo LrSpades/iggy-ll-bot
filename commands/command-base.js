@@ -56,6 +56,7 @@ module.exports = (client, commandOptions) => {
         callback,
         cooldown = -1,
         servers = null,
+        testing = false,
     } = commandOptions;
 
     // Ensure hte command and aliases are in an array
@@ -66,6 +67,7 @@ module.exports = (client, commandOptions) => {
     if (typeof servers == 'string') {
         commands = [commands];
     }
+
 
     console.log(`Registering command "${commands[0]}"`);
 
@@ -82,6 +84,10 @@ module.exports = (client, commandOptions) => {
         const { member, content, guild } = message;
 
         if(message.author.bot) return;
+
+        if(message.author.id !== Settings.owner.user.id && testing) {
+            return message.reply('Listen here you piece of \\:poop: i bet its you pixel. I made a testing feature so ppl like you dont fing use my commands WHEN IM TESTING THEMMMMM');
+        }
 
         if(servers) {
             for (const server of servers) {
