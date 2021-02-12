@@ -85,10 +85,6 @@ module.exports = (client, commandOptions) => {
 
         if(message.author.bot) return;
 
-        if(message.author.id !== Settings.owner.user.id && testing) {
-            return message.reply('Listen here you piece of \\:poop: i bet its you pixel. I made a testing feature so ppl like you dont fing use my commands WHEN IM TESTING THEMMMMM');
-        }
-
         if(servers) {
             for (const server of servers) {
                 if (server !== message.guild.id) return;
@@ -102,6 +98,11 @@ module.exports = (client, commandOptions) => {
                         message.reply(permissionError);
                         return;
                     }
+                }
+
+                if(message.author.id !== Settings.owner.user.id && testing) {
+                    console.log(message.author + Settings.owner.user);
+                    return message.reply('Listen here you piece of \\:poop: i bet its you pixel. I made a testing feature so ppl like you dont fing use my commands WHEN IM TESTING THEMMMMM');
                 }
 
                 for (const requiredRole of requiredRoles) {
