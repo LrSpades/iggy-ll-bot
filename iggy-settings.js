@@ -33,8 +33,8 @@ module.exports = {
                 userId = null,
             } = options;
 
-            Bean.send(`-${cost} ${userId}`).then(() => {
-                Bean.awaitMessages(message => message.author.id === '571638228684374033', {
+            client.channels.cache.get('790023648064700436').send(`-${cost} ${userId}`).then(() => {
+                client.channels.cache.get('790023648064700436').awaitMessages(message => message.author.id === '571638228684374033', {
                     max: 1,
                     time: 3000,
                     errors: ['time'],
