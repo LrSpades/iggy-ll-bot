@@ -11,8 +11,6 @@ module.exports = {
         const cost = 50;
         const mutedRole = message.guild.roles.cache.find(role => role.id == '638763146940514355');
 
-		if(!target.voice.channel) return message.channel.send(`${target.user.username} is not in a voice channel.`);
-
         const filter = message => message.author.id === message.author.id;
 
         message.delete();
