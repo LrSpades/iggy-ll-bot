@@ -4,7 +4,7 @@ module.exports = {
     minArgs: 1,
     maxArgs: 1,
     callback: (Settings, message, args, text) => {
-        const user = message.author;
+        const user = message.member;
         const target = message.mentions.members.first();
         const Bean = Settings.client.channels.cache.get('790023648064700436');
         const originChannel = message.channel;
