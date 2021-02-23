@@ -1,5 +1,5 @@
 module.exports = {
-    commands: ['boof'],
+    commands: ['poof'],
     expectedArgs: '<member>',
     minArgs: 1,
     maxArgs: 1,
