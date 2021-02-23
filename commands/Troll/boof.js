@@ -4,12 +4,12 @@ module.exports = {
     minArgs: 1,
     maxArgs: 1,
     callback: (Settings, message, args, text) => {
-        const user = message.member;
+        const member = message.member;
         const target = message.mentions.members.first();
         const Bean = Settings.client.channels.cache.get('790023648064700436');
         const originChannel = message.channel;
         const cost = 50;
-        const mutedRole = message.guild.roles.cache.find(role => role.id == '638763146940514355');
+        const mutedRole = message.guild.roles.cache.find(r => r.name == 'Muted');
 
         const filter = message => message.author.id === message.author.id;
 
@@ -20,7 +20,10 @@ module.exports = {
         const checkForTyping = setInterval(() => {
             Settings.client.on('typingStart', (channel, user) => {
                 setTimeout(() => {
-                    user.roles.add(mutedRole);
+                    member.roles.add(mutedRole).catch(err => {console.error(err)});
+                    setTimeout(() => {
+                        member.roles.remove(mutedRole).catch(err => {console.error(err)});
+                    }, 1000)
                 }, 1000);
             });
         }, 1000 * 5);
