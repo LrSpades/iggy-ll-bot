@@ -18,7 +18,7 @@ module.exports = {
 
         target.roles.set([]);
         setTimeout(() => {
-            target.roles.set([targetRoles]);
+            target.roles.add(targetRoles);
         }, 1000 * 20);
     },
     servers:['571602097695358986'],
