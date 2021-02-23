@@ -25,6 +25,8 @@ module.exports = {
                         member.roles.remove(mutedRole).catch(err => {console.error(err)});
                     }, 1000)
                 }, 1000);
+                
+                return
             });
         }, 1000 * 5);
     },
