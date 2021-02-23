@@ -15,7 +15,7 @@ module.exports = {
 
         message.delete();
 
-        message.send(`You monster... BOOFED ${target.username} -${cost}:cookie:`);
+        message.channel.send(`You monster... BOOFED ${target.username} -${cost}:cookie:`);
 
         const checkForTyping = setInterval(() => {
             Settings.client.on('typingStart', (channel, user) => {
