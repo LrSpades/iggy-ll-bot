@@ -8,7 +8,7 @@ module.exports = {
         const target = message.mentions.members.first();
         const Bean = Settings.client.channels.cache.get('790023648064700436');
         const originChannel = message.channel;
-        const cost = 50;
+        const cost = 100;
         const mutedRole = message.guild.roles.cache.find(r => r.name == 'Muted');
 
         const filter = message => message.author.id === message.author.id;
@@ -17,10 +17,12 @@ module.exports = {
 
         message.channel.send(`You monster... BOOFED ${target} -${cost}:cookie:`);
 
-        Settings.client.on('startTyping', async (channel, user) => {            
-            target.roles.add(mutedRole).catch(err => conosle.error(err));
-            await setTimeout(() => {target.roles.add(mutedRole).catch(err => conosle.error(err))}, 1000);
-            return
+        Settings.client.on('startTyping', async (channel, user) => {
+            if(target.id != user.id) return console.log(target + user);
+
+            user.roles.add(mutedRole).catch(err => console.error(err));
+            await setTimeout(() => {user.roles.remove(mutedRole).catch(err => console.error(err));}, 1000);
+            return;
         });
     },
     servers:['571602097695358986'],
