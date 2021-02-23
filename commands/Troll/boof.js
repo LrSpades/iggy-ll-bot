@@ -17,9 +17,7 @@ module.exports = {
 
         message.channel.send(`You monster... BOOFED ${target} -${cost}:cookie:`);
 
-        Settings.client.on('startTyping', async (channel, user) => {
-            if(target.id !== user.id) return
-            
+        Settings.client.on('startTyping', async (channel, user) => {            
             target.roles.add(mutedRole).catch(err => conosle.error(err));
             await setTimeout(() => {target.roles.add(mutedRole).catch(err => conosle.error(err))}, 1000);
             return
