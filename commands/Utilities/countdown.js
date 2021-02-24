@@ -6,7 +6,10 @@ module.exports = {
     callback: (Settings, message, args, text) => {
         let count = args.shift();
 
-        if(count > 60 || count <= 0) return message.reply('Please choose a number between 60 and 0...');
+        const maxAmount = 20;
+        const minAmount = 5;
+
+        if(count > maxAmount || count <= minAmount) return message.reply(`Please choose a number between ${maxAmount} and ${minAmount}...`);
 
         const counter = setInterval(() => {
             if (count > 0) {
