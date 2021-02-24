@@ -34,7 +34,7 @@ module.exports = {
             } = options;
 
             client.channels.cache.get('790023648064700436').send(`-${cost} ${userId}`).then(() => {
-                client.channels.cache.get('790023648064700436').awaitMessages(message => message.author.id === '571638228684374033', {
+                client.channels.cache.get('790023648064700436').awaitMessages(message => message.author.id === message.author.id, {
                     max: 1,
                     time: 3000,
                     errors: ['time'],
