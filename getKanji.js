@@ -12,7 +12,8 @@ async function getKanji() {
     const $kanjiCollection = $('.character');
     
     const values = $kanjiCollection.toArray().map(async (kanji) => {
-      const kanjiUri = `https://www.wanikani.com/kanji/${kanji.text()}`;
+      const $kanji = $(kanji)
+      const kanjiUri = `https://www.wanikani.com/kanji/${$kanji.text()}`;
       const kanjiPage = await got(kanjiUri);
       $ = cheerio.load(response.body);
       
