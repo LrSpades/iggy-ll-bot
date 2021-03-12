@@ -44,3 +44,5 @@ async function scrape() {
   console.log(kanjiStats);
   console.log('Done!');
 }
+
+scrape();
