@@ -33,14 +33,14 @@ async function getKanji() {
       return kanjiObject;
     });
     
-    return values;
+    console.log(values);
   });
 }
 
 async function scrape() {
-  const kanjiStats = async getKanji();
-  
-  console.log(kanjiStats);
+  console.log('Getting kanji...')
+  async getKanji();
+  console.log('Done!')
 }
 
 scrape();
