@@ -6,7 +6,7 @@ const difficulties = ['Pleasant', 'Painful', 'Death', 'Hell', 'Paradise', 'Reali
 async function getKanji() {
   difficulties.forEach(async (df) => {
     const uri = `https://www.wanikani.com/kanji?difficulty=${df}`;
-    const response = await got(url);
+    const response = await got(uri);
     const $ = cheerio.load(response.body);
     
     const $kanjiCollection = $('.character');
