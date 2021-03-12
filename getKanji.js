@@ -21,7 +21,7 @@ async function getKanji() {
       
       let kanjiObject = '';
       
-      await for (info of kanjiInfo) {
+      for (info of kanjiInfo) {
         const info = $(info);
         
         kanjiObject = kanjiObject + $info.text();
