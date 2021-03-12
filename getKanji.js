@@ -38,7 +38,9 @@ async function getKanji() {
 }
 
 async function scrape() {
+  console.log('Beginning to get kanji...');
   const kanjiStats = async getKanji();
   
-  console.log();
+  console.log(kanjiStats);
+  console.log('Done!');
 }
