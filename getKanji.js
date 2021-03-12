@@ -16,12 +16,9 @@ async function getKanji() {
       const kanjiPage = await got(kanjiUri);
       $ = cheerio.load(response.body);
       
-      let kanjiObject = {
-      };
-      
       const kanjiInfo = $kanjiCollection.find('h1:not(a > h1), .alt-character-list, .alternative-meaning:not(.user-synonyms), .mnemonic-content, .span4').toArray();
       
-      let kanjiObject;
+      let kanjiObject = '';
       
       for (info of kanjiInfo) {
         const info = $(info);
