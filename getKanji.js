@@ -17,11 +17,11 @@ async function getKanji() {
       const kanjiPage = await got(kanjiUri);
       $ = cheerio.load(response.body);
       
-      const kanjiInfo = $kanjiCollection.find('h1:not(a > h1), .alt-character-list, .alternative-meaning:not(.user-synonyms), .mnemonic-content, .span4').toArray();
+      const kanjiInfo = await $kanjiCollection.find('h1:not(a > h1), .alt-character-list, .alternative-meaning:not(.user-synonyms), .mnemonic-content, .span4').toArray();
       
       let kanjiObject = '';
       
-      for (info of kanjiInfo) {
+      await for (info of kanjiInfo) {
         const info = $(info);
         
         kanjiObject = kanjiObject + $info.text();
@@ -30,7 +30,7 @@ async function getKanji() {
       return kanjiObject;
     });
     
-    console.log(values);
+    await console.log(values);
   });
 }
 
