@@ -19,16 +19,15 @@ async function getKanji() {
       let kanjiObject = {
       };
       
-      const $kanjiInfo = T('h1:not(a > h1), .alt-character-list, .alternative-meaning:not(.user-synonyms), .mnemonic-content, .span4').toArray();
+      const kanjiInfo = $kanjiCollection.find('h1:not(a > h1), .alt-character-list, .alternative-meaning:not(.user-synonyms), .mnemonic-content, .span4').toArray();
       
-      kanjiObject.kanji = $($kanjiInfo.shift()).text();
-      kanjiObject.radicalCombo = $($kanjiInfo.shift()).text();
-      kanjiObject.meanings = $($kanjiInfo.shift()).text();
-      kanjiObject.mnemonic = $($kanjiInfo.shift()).text();
-      kanjiObject.onyomi = $($kanjiInfo.shift()).text();
-      kanjiObject.kunyomi = $($kanjiInfo.shift()).text();
-      kanjiObject.nanori = $($kanjiInfo.shift()).text();
-      kanjiObject.readingsMnemonic = $($kanjiInfo.shift()).text();
+      let kanjiObject;
+      
+      for (info of kanjiInfo) {
+        const info = $(info);
+        
+        kanjiObject = kanjiObject + $info.text();
+      }
       
       return kanjiObject;
     });
