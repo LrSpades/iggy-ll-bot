@@ -11,7 +11,7 @@ async function getKanji() {
     
     const $kanjiCollection = $('.character');
     
-    const values = $kanjiCollection.toArray().map(async (kanji) => {
+    const values = await $kanjiCollection.toArray().map(async (kanji) => {
       const $kanji = $(kanji)
       const kanjiUri = `https://www.wanikani.com/kanji/${$kanji.text()}`;
       const kanjiPage = await got(kanjiUri);
