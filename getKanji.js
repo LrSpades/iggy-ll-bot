@@ -39,7 +39,7 @@ async function getKanji() {
 
 async function scrape() {
   console.log('Getting kanji...')
-  async getKanji();
+  await getKanji();
   console.log('Done!')
 }
 
