@@ -20,8 +20,8 @@ module.exports = {
         Settings.client.on('startTyping', async (channel, user) => {
             if(target.id != user.id) return console.log(target + user);
 
-            user.roles.add(mutedRole).catch(err => console.error(err));
-            await setTimeout(() => {user.roles.remove(mutedRole).catch(err => console.error(err));}, 1000);
+            target.roles.add(mutedRole).catch(err => console.error(err));
+            await setTimeout(() => {target.roles.remove(mutedRole).catch(err => console.error(err));}, 1000);
             return;
         });
     },

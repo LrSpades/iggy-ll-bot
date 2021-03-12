@@ -7,6 +7,7 @@ const path = require('path');
 
 
 module.exports = {
+    Admins: [],
     Discord: Discord,
     owner: {
         id: '632260979148718084',
@@ -41,10 +42,11 @@ module.exports = {
                 }).then(message => {
                     message = message.first();
                     if(message.content === 'Success') {
+                        console.log(`Transaction occured | ${new Date()} | Amount: ${cost} | Origin: ${origin} | User: ${userId}`);
                         return true;
                     }
                     else {
-                        origin.send(`You don't have enough cookies! (You need ${cost} cookies...)`);
+                        return origin.send(`You don't have enough cookies! (You need ${cost} cookies...)`);
                     }
                 }).catch(collected => {
                     console.log('COLLECTED' + collected);

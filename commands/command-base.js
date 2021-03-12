@@ -85,18 +85,18 @@ module.exports = (client, commandOptions) => {
 
         if(message.author.bot) return;
 
-        if(servers) {
-            for (const server of servers) {
-                if (server !== message.guild.id) return;
-            }
-        }
-
         for (const alias of commands) {
             if (content.toLowerCase().startsWith(`${prefix}${alias.toLowerCase()}`)) {
                 for (const permission of permissions) {
                     if (!member.hasPermission(permission)) {
                         message.reply(permissionError);
                         return;
+                    }
+                }
+
+                if(servers) {
+                    for (const server of servers) {
+                        if (server != message.guild.id) return;
                     }
                 }
 
